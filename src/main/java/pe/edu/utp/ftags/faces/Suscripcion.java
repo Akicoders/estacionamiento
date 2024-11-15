@@ -1,5 +1,12 @@
-package pe.edu.utp.ftags.model;
+package pe.edu.utp.ftags.faces;
 
+import pe.edu.utp.ftags.model.SuscripcionPrototype;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
+@ManagedBean
+@SessionScoped
 public class Suscripcion implements SuscripcionPrototype {
     private String nombre;
     private float precio;

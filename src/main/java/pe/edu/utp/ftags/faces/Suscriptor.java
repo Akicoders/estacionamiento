@@ -1,7 +1,11 @@
-package pe.edu.utp.ftags.model;
+package pe.edu.utp.ftags.faces;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
 
+@ManagedBean
+@SessionScoped
 public class Suscriptor implements Serializable {
 
     public String dni;

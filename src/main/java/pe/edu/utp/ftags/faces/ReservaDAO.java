@@ -10,6 +10,7 @@ import pe.edu.utp.ftags.util.DataAccessMariaDB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import java.io.IOException;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.time.Duration;
@@ -21,7 +22,7 @@ import java.util.logging.Logger;
 
 @ManagedBean
 @SessionScoped
-public class ReservaDAO {
+public class ReservaDAO implements Serializable {
     private static final Logger log = Logger.getLogger("pe.edu.utp.estacionamiento");
     
     public static List<RegistroEntrada> getRegistroEntrada() throws IOException {
@@ -178,7 +179,5 @@ public class ReservaDAO {
         }
         return total;
     }
-
-
 
 }

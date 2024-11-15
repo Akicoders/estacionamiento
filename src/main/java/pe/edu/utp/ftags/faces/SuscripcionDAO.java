@@ -1,8 +1,6 @@
 package pe.edu.utp.ftags.faces;
 
 
-import pe.edu.utp.ftags.model.Suscripcion;
-import pe.edu.utp.ftags.model.Suscriptor;
 import pe.edu.utp.ftags.services.AppConfig;
 import pe.edu.utp.ftags.util.DataAccessMariaDB;
 
@@ -10,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.naming.NamingException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -21,7 +20,7 @@ import java.util.logging.Logger;
 
 @ManagedBean
 @SessionScoped
-public class SuscripcionDAO {
+public class SuscripcionDAO implements Serializable {
     private final Connection cnn;
     private static final Logger log = Logger.getLogger("pe.edu.utp.estacionamiento");
 

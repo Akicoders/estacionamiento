@@ -5,7 +5,136 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:outputLabel value="Hello, world"/>
-</f:view>
+<h:head>
+    <title>Resumen de Reserva</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&;display=swap" rel="stylesheet" />
+    <h:outputStylesheet>
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background-color: rgba(0, 0, 0, 0.9);
+            color: #22c55e;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: linear-gradient(45deg, rgba(255, 0, 255, 0.1) 25%, transparent 25%),
+            linear-gradient(-45deg, rgba(255, 0, 255, 0.1) 25%, transparent 25%),
+            linear-gradient(45deg, transparent 75%, rgba(255, 0, 255, 0.1) 75%),
+            linear-gradient(-45deg, transparent 75%, rgba(255, 0, 255, 0.1) 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 28rem;
+            padding: 2rem;
+        }
+
+        .card {
+            background-color: #111827;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border: 2px solid #22c55e;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .title {
+            font-size: 1.875rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #ec4899;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .reservation-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .detail {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .label {
+            color: #22d3ee;
+        }
+
+        .value {
+            color: #f472b6;
+        }
+
+        .confirm-btn {
+            width: 100%;
+            margin-top: 1.5rem;
+            padding: 0.5rem;
+            background-color: #db2777;
+            color: #000000;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .confirm-btn:hover {
+            background-color: #22d3ee;
+        }
+    </h:outputStylesheet>
+</h:head>
+
+<h:body>
+    <div class="container">
+        <div class="card">
+            <div class="card-content">
+                <h1 class="title">Resumen de Reserva</h1>
+                <div class="reservation-details">
+                    <div class="detail">
+                        <span class="label">Fecha:</span>
+                        <span class="value">
+                            #{reserva.fechaHoraEntrada}
+                        </span>
+                    </div>
+                    <div class="detail">
+                        <span class="label">Vehículo:</span>
+                        <span class="value">
+                          #{reserva.tipoVehiculo}
+                        </span>
+                    </div>
+                    <div class="detail">
+                        <span class="label">DNI del Piloto:</span>
+                        <span class="value">
+                            #{reserva.dni}
+                        </span>
+                    </div>
+                    <div class="detail">
+                        <span class="label">Nombre del Piloto:</span>
+                        <span class="value">
+                        #{reserva.nombreConductor}
+                        </span>
+                    </div>
+                    <h:panelGrid columns="2" rendered=" #{reserva.lavado} ">
+                        <span class="label">Lavado:</span>
+                        <span class="value">#{ reserva.lavado ? "Si" : "NO" } </span>
+                    </h:panelGrid>
+                </div>
+                <h:commandButton value="Regresar al formulario"
+                                 onclick="alert('Reserva confirmada. ¡Prepárate para el futuro!')"
+                                 action="formulario.xhtml"
+                                 styleClass="confirm-btn" />
+            </div>
+        </div>
+    </div>
+</h:body>
 </html>
