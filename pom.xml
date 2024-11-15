@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>pe.edu.utp</groupId>
-    <artifactId>ftags</artifactId>
+    <artifactId>estacionamiento</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>ftags</name>
+    <name>estacionamiento</name>
     <packaging>war</packaging>
 
     <properties>
@@ -52,14 +52,14 @@
     </dependencies>
 
     <build>
-        <finalName>bookfriend</finalName>
+        <finalName>Estacionamiento Cyberpunk</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.2</version>
                 <configuration>
-                    <warName>bookfriend</warName>
+                    <warName>Estacionamiento Cyberpunk</warName>
                 </configuration>
             </plugin>
         </plugins>
