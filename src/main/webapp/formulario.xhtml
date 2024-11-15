@@ -205,7 +205,7 @@
     </h:head>
 
     <h:body>
-        <ui:include src="WEB-INF/template/nav.xhtml"></ui:include>
+        <ui:include src="WEB-INF/templates/nav.xhtml"></ui:include>
 
         <div class="container">
             <div class="content-wrapper">
@@ -223,10 +223,8 @@
                         </div>
                         <div class="form-group">
                             <label for="tipoVehiculo">Tipo de Vehículo:</label>
-                            <p:selectOneMenu id="tipoVehiculo" required="true" requiredMessage="Seleccione su tipo de vehiculo">
-                                #{for (int i = 0; i < #{registroEntrada.tipoVehiculo.values()}; i++) {
-                                <f:selectItem value="#{java.util.Arrays.stream(registroEntrada.tipoVehiculo.values()).toList()}"/>
-                                }}
+                            <p:selectOneMenu id="tipoVehiculo" value="#{registroEntrada.tipoVehiculo}" required="true" requiredMessage="Seleccione su tipo de vehiculo">
+                                <f:selectItems value="#{registroEntrada.tipoVehiculo.values()}" var="tipo" itemValue="#{tipo}" itemLabel="#{tipo}"/>
                             </p:selectOneMenu>
                         </div>
                         <div class="form-group">
