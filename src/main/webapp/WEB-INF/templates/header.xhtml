@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:insert name="header">
+   <div class="surface-section  px-4 py-2 md:px-6 lg:px-8 ui-widget">
+      <div class="flex align-items-start flex-column lg:flex-row lg:justify-content-between">
+         <div class="flex align-items-start flex-column md:flex-row">
+            <p:graphicImage id="avatar" url="/img/#{user.img}" styleClass="mr-5 mb-3 lg:mb-0" style="width:90px;height:90px" />
+            <div>
+               <span class="text-900 font-medium text-3xl">#{user.fullname}</span>
+               <i class="pi pi-star text-2xl ml-4 mr-4 text-green-500"></i>
+               <p:commandButton type="submit" value="Logout" styleClass="ui-tag rounded-button h-2rem vertical-align-middle p-0" action="#{user.logout()}"  />
+               <div class="flex align-items-center flex-wrap text-sm">
+                  <div class="mr-5 mt-3">
+                     <span class="font-medium text-500">FOLLOWERS</span>
+                     <div class="text-700 mt-2">${user.followers}</div>
+                  </div>
+                  <div class="mr-5 mt-3">
+                     <span class="font-medium text-500">BOOKS</span>
+                     <div class="text-700 mt-2">#{user.books}</div>
+                  </div>
+                  <div class="mr-5 mt-3">
+                     <span class="font-medium text-500">COMMENTS</span>
+                     <div class="text-700 mt-2">#{user.comments}</div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="border-top-1 mt-2 w-full border-dashed surface-border"></div>
+   </div>
+</ui:insert>
+</html>
