@@ -203,7 +203,6 @@
 </head>
 <body>
 
-</div>
 <div class="container">
     <div class="card-content">
         <div class="alert" role="alert">

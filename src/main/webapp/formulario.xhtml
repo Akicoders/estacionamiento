@@ -4,8 +4,278 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 <f:view>
-    <h:outputLabel value="Hello, world"/>
+    <h:head>
+        <title>Error</title>
+        <h:outputStylesheet>
+            @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;display=swap');
+
+            body {
+                font-family: 'Orbitron', sans-serif;
+                background-color: #0a0a0a;
+                color: #00ff00;
+                margin: 0;
+                padding: 0;
+                line-height: 1.6;
+                background-image:
+                        linear-gradient(45deg, rgba(255, 0, 255, 0.1) 25%, transparent 25%),
+                        linear-gradient(-45deg, rgba(255, 0, 255, 0.1) 25%, transparent 25%),
+                        linear-gradient(45deg, transparent 75%, rgba(255, 0, 255, 0.1) 75%),
+                        linear-gradient(-45deg, transparent 75%, rgba(255, 0, 255, 0.1) 75%);
+                background-size: 20px 20px;
+                background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            }
+
+            .container {
+                max-width: 1200px;
+                margin: 40px auto;
+                background-color: rgba(9, 9, 11, 0.9);
+                border: 2px solid #00ff00;
+                border-radius: 15px;
+                padding: 30px;
+                box-shadow: 0 0 30px #00ff00, 0 0 50px #ff00ff;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                backdrop-filter: blur(5px);
+            }
+
+            h1, h2 {
+                text-align: center;
+                color: #ff00ff;
+                text-transform: uppercase;
+                letter-spacing: 3px;
+                margin-bottom: 30px;
+                text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            h2 {
+                font-size: 2em;
+                margin-top: 50px;
+            }
+
+            label {
+                display: block;
+                margin-bottom: 8px;
+                color: #00ffff;
+                font-weight: bold;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+
+            input, select {
+                width: 90%;
+                padding: 12px;
+                border: 1px solid #00ff00;
+                background-color: rgba(0, 255, 0, 0.1);
+                color: #00ff00;
+                border-radius: 5px;
+                font-family: 'Orbitron', sans-serif;
+                font-size: 16px;
+                transition: all 0.3s ease;
+            }
+
+            select {
+                width: 95%;
+            }
+
+            input:focus, select:focus {
+                outline: none;
+                box-shadow: 0 0 15px #00ffff;
+                background-color: rgba(0, 255, 255, 0.1);
+            }
+
+            button {
+                width: 100%;
+                padding: 15px;
+                background-color: #ff00ff;
+                color: #0a0a0a;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 18px;
+                font-weight: bold;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                transition: all 0.3s ease;
+                box-shadow: 0 0 15px #ff00ff;
+            }
+
+            button:hover {
+                background-color: #00ffff;
+                box-shadow: 0 0 25px #00ffff;
+                transform: translateY(-3px);
+            }
+
+            .toggle-switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+            input:checked + .slider {
+                background-color: #00ffff;
+            }
+
+            input:checked + .slider:before {
+                transform: translateX(26px);
+            }
+
+            .slider:after {
+                content: 'NO';
+                color: #fff;
+                display: block;
+                position: absolute;
+                transform: translate(-50%,-50%);
+                top: 50%;
+                left: 70%;
+                font-size: 10px;
+                font-family: Verdana, sans-serif;
+            }
+
+            input:checked + .slider:after {
+                content: 'SÍ';
+                left: 30%;
+            }
+
+            .pilot-table th, .pilot-table td {
+                padding: 15px;
+                text-align: left;
+                background-color: rgba(0, 255, 255, 0.1);
+                border: 1px solid #00ffff;
+            }
+
+            .pilot-table th {
+                background-color: rgba(255, 0, 255, 0.2);
+                color: #ff00ff;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+
+            .pilot-table tr:not(:first-child) {
+                transition: all 0.3s ease;
+            }
+
+            .pilot-table tr:not(:first-child):hover {
+                background-color: rgba(0, 255, 255, 0.2);
+                transform: scale(1.02);
+                box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+            }
+
+
+            @media (max-width: 768px) {
+                .container {
+                    margin: 20px;
+                }
+                h1 {
+                    font-size: 2em;
+                }
+                .pilot-table th, .pilot-table td {
+                    padding: 10px;
+                }
+            }
+
+            @keyframes glitch-anim {
+                0% { clip: rect(31px, 9999px, 94px, 0); }
+                20% { clip: rect(62px, 9999px, 42px, 0); }
+                40% { clip: rect(16px, 9999px, 78px, 0); }
+                60% { clip: rect(89px, 9999px, 13px, 0); }
+                80% { clip: rect(24px, 9999px, 57px, 0); }
+                100% { clip: rect(73px, 9999px, 35px, 0); }
+            }
+
+            a {
+                text-decoration: none;
+                color: #ffffff;
+                margin-top: 20em;
+            }
+
+            .alert {
+                background-color: #3d0006;
+                color: #eb8791;
+                border: 1px solid #660711;
+            }
+        </h:outputStylesheet>
+    </h:head>
+
+    <h:body>
+        <ui:include src="WEB-INF/template/nav.xhtml"></ui:include>
+
+        <div class="container">
+            <div class="content-wrapper">
+                <div class="image-container">
+                    <img src="img/default.jpg" alt="Foto Principal " class="car-image" id="carImage"/>
+                </div>
+                <div class="form-container">
+                    <h1 class="glitch-effect">Guarda tu Coche</h1>
+                    <form id="reservationForm" action="#" method="post">
+                        <div class="form-group">
+                            <label for="fechaHora">Fecha y Hora de Reserva:</label>
+                            <p:inputText type="datetime-local" id="fechaHora" required="true"
+                                         requiredMessage="Ingrese una fecha y hora válida"
+                                         validatorMessage="La fecha y hora debe ser la fecha actual" value="#{}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="tipoVehiculo">Tipo de Vehículo:</label>
+                            <p:selectOneMenu id="tipoVehiculo" required="true" requiredMessage="Seleccione su tipo de vehiculo">
+                                #{for (int i = 0; i < TipoVehiculo.values().length; i++) {
+                                <f:selectItem value="#{java.util.Arrays.stream(TipoVehiculo.values()).toList().get(i).name()}"/>
+                                }}
+                            </p:selectOneMenu>
+                        </div>
+                        <div class="form-group">
+                            <label for="placa">Número de Placa:</label>
+                            <p:inputText type="text" id="placa" required="true"
+                                         requiredMessage="Ingrese una placa válida"
+                                         validatorMessage="Ingrese una placa válida (6 caracteres alfanuméricos)" />
+                        </div>
+                        <div class="form-group">
+                            <label for="dni">DNI del Piloto:</label>
+                            <p:inputText type="text" id="dni" required="true"
+                                         requiredMessage="Ingrese una DNI válida"
+                                         validatorMessage="Ingrese un DNI válido (8 números seguidos)" />
+                        </div>
+                        <div class="form-group">
+                            <label for="nombreChofer">Nombre del Piloto:</label>
+                            <p:inputText type="text" id="nombreChofer" required="true"
+                                         requiredMessage="Ingrese una nombre del chofer"
+                                         validatorMessage="El nombre debe tener una longitud entre 2 y 20" />
+                        </div>
+
+                        <div class="toggle-container">
+                            <label class="toggle-label">¿Desea lavado?</label>
+                            <label class="toggle-switch">
+                                <p:inputText type="checkbox" id="lavado" required="true"
+                                             requiredMessage="Seleccione si desea el lavado"
+                                             validatorMessage="El lavado debe ser si o no" />
+                                <span class="slider"></span>
+                            </label>
+                            <label class="lavado-info" > <a href="suscripcion.xhtml"> Tenemos suscripciones para ti solo con un click </a>   </label>
+                            <label class="lavado-info" for="lavado">El lavado costara S/.20 adicional </label>
+                        </div>
+                        <button type="submit">Reservar Ahora</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <h:outputScript>
+            document.getElementById('tipoVehiculo').addEventListener('change', function(e) {
+                // Obtén el valor seleccionado correctamente
+                var tipoVehiculo = document.getElementById("tipoVehiculo").value;
+                // Selecciona la imagen del vehículo
+                const carImage = document.getElementById('carImage');
+                // Cambia el atributo 'src' de la imagen con el valor obtenido
+                carImage.setAttribute('src', "img/" + tipoVehiculo + ".jpg");
+            });
+
+        </h:outputScript>
+    </h:body>
 </f:view>
 </html>
