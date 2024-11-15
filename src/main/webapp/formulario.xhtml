@@ -219,13 +219,13 @@
                             <label for="fechaHora">Fecha y Hora de Reserva:</label>
                             <p:inputText type="datetime-local" id="fechaHora" required="true"
                                          requiredMessage="Ingrese una fecha y hora válida"
-                                         validatorMessage="La fecha y hora debe ser la fecha actual" value="#{}" />
+                                         validatorMessage="La fecha y hora debe ser la fecha actual" value="#{registroEntrada.fechaHoraEntrada}" />
                         </div>
                         <div class="form-group">
                             <label for="tipoVehiculo">Tipo de Vehículo:</label>
                             <p:selectOneMenu id="tipoVehiculo" required="true" requiredMessage="Seleccione su tipo de vehiculo">
-                                #{for (int i = 0; i < TipoVehiculo.values().length; i++) {
-                                <f:selectItem value="#{java.util.Arrays.stream(TipoVehiculo.values()).toList().get(i).name()}"/>
+                                #{for (int i = 0; i < #{registroEntrada.tipoVehiculo.values()}; i++) {
+                                <f:selectItem value="#{java.util.Arrays.stream(registroEntrada.tipoVehiculo.values()).toList()}"/>
                                 }}
                             </p:selectOneMenu>
                         </div>
@@ -233,19 +233,19 @@
                             <label for="placa">Número de Placa:</label>
                             <p:inputText type="text" id="placa" required="true"
                                          requiredMessage="Ingrese una placa válida"
-                                         validatorMessage="Ingrese una placa válida (6 caracteres alfanuméricos)" />
+                                         validatorMessage="Ingrese una placa válida (6 caracteres alfanuméricos)" value="#{registroEntrada.placa}" />
                         </div>
                         <div class="form-group">
                             <label for="dni">DNI del Piloto:</label>
                             <p:inputText type="text" id="dni" required="true"
                                          requiredMessage="Ingrese una DNI válida"
-                                         validatorMessage="Ingrese un DNI válido (8 números seguidos)" />
+                                         validatorMessage="Ingrese un DNI válido (8 números seguidos)" value="#{registroEntrada.dni}" />
                         </div>
                         <div class="form-group">
                             <label for="nombreChofer">Nombre del Piloto:</label>
                             <p:inputText type="text" id="nombreChofer" required="true"
                                          requiredMessage="Ingrese una nombre del chofer"
-                                         validatorMessage="El nombre debe tener una longitud entre 2 y 20" />
+                                         validatorMessage="El nombre debe tener una longitud entre 2 y 20" value="#{registroEntrada.nombreConductor}" />
                         </div>
 
                         <div class="toggle-container">
@@ -253,7 +253,7 @@
                             <label class="toggle-switch">
                                 <p:inputText type="checkbox" id="lavado" required="true"
                                              requiredMessage="Seleccione si desea el lavado"
-                                             validatorMessage="El lavado debe ser si o no" />
+                                             validatorMessage="El lavado debe ser si o no" value="#{registroEntrada.lavado}" />
                                 <span class="slider"></span>
                             </label>
                             <label class="lavado-info" > <a href="suscripcion.xhtml"> Tenemos suscripciones para ti solo con un click </a>   </label>
