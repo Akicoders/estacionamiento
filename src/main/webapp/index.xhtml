@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Login Cyberpunk 2077</title>
+    <style type="text/css">
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&amp;display=swap');
+
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Orbitron', sans-serif;
+            background-color: #000;
+            color: #0f0;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            background:
+                    linear-gradient(45deg, rgba(255,0,255,0.1) 25%, transparent 25%),
+                    linear-gradient(-45deg, rgba(255,0,255,0.1) 25%, transparent 25%),
+                    linear-gradient(45deg, transparent 75%, rgba(255,0,255,0.1) 75%),
+                    linear-gradient(-45deg, transparent 75%, rgba(255,0,255,0.1) 75%);
+            background-size: 20px 20px;
+            animation: backgroundScroll 5s linear infinite;
+        }
+
+        @keyframes backgroundScroll {
+            0% { background-position: 0 0, 0 10px, 10px -10px, -10px 0; }
+            100% { background-position: -20px -20px, -20px -10px, -10px -30px, -30px -20px; }
+        }
+
+        .login-form {
+            background: rgba(0,0,0,0.8);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,255,255,0.5), 0 0 30px rgba(255,0,255,0.5), 0 0 40px rgba(255,255,0,0.5);
+            max-width: 400px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-form::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                    transparent,
+                    rgba(255, 0, 255, 0.3),
+                    transparent 30%
+            );
+            animation: rotate 4s linear infinite;
+        }
+
+        .login-form::after {
+            content: "";
+            position: absolute;
+            inset: 4px;
+            background: rgba(0,0,0,0.9);
+            border-radius: 11px;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(1turn); }
+        }
+
+        h2 {
+            color: #0ff;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cyberpunk-quote {
+            color: #ff00ff;
+            text-align: center;
+            font-style: italic;
+            margin-bottom: 30px;
+            font-size: 16px;
+            text-shadow: 0 0 5px #ff00ff;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #0ff;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #0f0;
+            background-color: rgba(0,255,0,0.1);
+            color: #0f0;
+            font-family: 'Orbitron', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus, input[type="password"]:focus {
+            outline: none;
+            border-color: #f0f;
+            box-shadow: 0 0 10px #f0f;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .checkbox-group label {
+            margin-left: 10px;
+            color: #0ff;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #f0f;
+            color: #000;
+            border: none;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        button:hover {
+            background-color: #0ff;
+            box-shadow: 0 0 20px #0ff;
+        }
+
+        .forgot-password {
+            text-align: center;
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .forgot-password a {
+            color: #0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .forgot-password a:hover {
+            color: #f0f;
+            text-shadow: 0 0 5px #f0f;
+        }
+
+        .glitch {
+            position: relative;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 #ff00de;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+
+        .glitch::after {
+            left: -2px;
+            text-shadow: -2px 0 #00fff9;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(31px, 9999px, 94px, 0); }
+            20% { clip: rect(62px, 9999px, 42px, 0); }
+            40% { clip: rect(16px, 9999px, 78px, 0); }
+            60% { clip: rect(89px, 9999px, 13px, 0); }
+            80% { clip: rect(24px, 9999px, 57px, 0); }
+            100% { clip: rect(73px, 9999px, 35px, 0); }
+        }
+
+        @keyframes glitch-anim2 {
+            0% { clip: rect(65px, 9999px, 119px, 0); }
+            20% { clip: rect(76px, 9999px, 86px, 0); }
+            40% { clip: rect(23px, 9999px, 62px, 0); }
+            60% { clip: rect(92px, 9999px, 6px, 0); }
+            80% { clip: rect(67px, 9999px, 93px, 0); }
+            100% { clip: rect(28px, 9999px, 59px, 0); }
+        }
+    </style>
+</h:head>
+
+<h:body>
+<div class="container">
+    <form class="login-form" action="#" method="post">
+        <h2 class="glitch">Acceso Neural</h2>
+        <p class="cyberpunk-quote">"El futuro está aquí, solo que mal distribuido." - William Gibson</p>
+        <div class="form-group">
+            <label for="username">ID de Usuario:</label>
+            <input type="text" id="username" name="username"  />
+        </div>
+        <div class="form-group">
+            <label for="password">Clave de Acceso:</label>
+            <input type="password" id="password" name="password"  />
+        </div>
+        <div class="checkbox-group">
+            <input type="checkbox" id="remember" name="remember" />
+            <label for="remember">Mantener conexión neural</label>
+        </div>
+        <button type="submit">Iniciar Sesión</button>
+        <div class="forgot-password">
+            <a href="#">¿Olvidaste tu clave de acceso?</a>
+        </div>
+    </form>
+</div>
+</h:body>
+</f:view>
+</html>
