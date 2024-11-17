@@ -4,13 +4,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-<f:view>
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view contentType="text/html" locale="#{idioma.idioma}" encoding="UTF-8" >
 <h:head>
+    <meta charset="UTF-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Login Cyberpunk 2077</title>
-    <style type="text/css">
+    <title>#{bundle['backup.title']}</title>
+    <h:outputStylesheet >
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&amp;display=swap');
 
         body, html {
@@ -19,21 +19,50 @@
             font-family: 'Orbitron', sans-serif;
             background-color: #000;
             color: #0f0;
-            overflow: hidden;
+            overflow-x: hidden;
+        }
+        /* Estilos para la barra de desplazamiento */
+        ::-webkit-scrollbar {
+            width: 12px;
+            background-color: #000;
         }
 
+        ::-webkit-scrollbar-track {
+            background: linear-gradient(90deg, #000, #001);
+            border: 1px solid #0ff;
+            border-radius: 10px;
+            box-shadow: inset 0 0 5px rgba(0, 255, 255, 0.5);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(90deg, #0ff, #f0f);
+            border-radius: 10px;
+            border: 1px solid #0f0;
+            box-shadow: 0 0 10px #0ff;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(90deg, #f0f, #0ff);
+            box-shadow: 0 0 15px #f0f;
+        }
+
+        /* Estilos para Firefox */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: #0ff #000;
+        }
         .container {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100%;
+            min-height: 100vh;
             background:
                     linear-gradient(45deg, rgba(255,0,255,0.1) 25%, transparent 25%),
                     linear-gradient(-45deg, rgba(255,0,255,0.1) 25%, transparent 25%),
                     linear-gradient(45deg, transparent 75%, rgba(255,0,255,0.1) 75%),
                     linear-gradient(-45deg, transparent 75%, rgba(255,0,255,0.1) 75%);
             background-size: 20px 20px;
-            animation: backgroundScroll 5s linear infinite;
+            animation: backgroundScroll 10s linear infinite;
         }
 
         @keyframes backgroundScroll {
@@ -41,7 +70,7 @@
             100% { background-position: -20px -20px, -20px -10px, -10px -30px, -30px -20px; }
         }
 
-        .login-form {
+        .cyberpunk-form {
             background: rgba(0,0,0,0.8);
             padding: 40px;
             border-radius: 15px;
@@ -52,7 +81,7 @@
             overflow: hidden;
         }
 
-        .login-form::before {
+        .cyberpunk-form::before {
             content: "";
             position: absolute;
             top: -50%;
@@ -67,7 +96,7 @@
             animation: rotate 4s linear infinite;
         }
 
-        .login-form::after {
+        .cyberpunk-form::after {
             content: "";
             position: absolute;
             inset: 4px;
@@ -88,17 +117,6 @@
             z-index: 1;
         }
 
-        .cyberpunk-quote {
-            color: #ff00ff;
-            text-align: center;
-            font-style: italic;
-            margin-bottom: 30px;
-            font-size: 16px;
-            text-shadow: 0 0 5px #ff00ff;
-            position: relative;
-            z-index: 1;
-        }
-
         .form-group {
             margin-bottom: 20px;
             position: relative;
@@ -111,7 +129,7 @@
             color: #0ff;
         }
 
-        input[type="text"], input[type="password"] {
+        input[type="text"], input[type="password"], input[type="date"] {
             width: 100%;
             padding: 10px;
             border: 2px solid #0f0;
@@ -119,25 +137,13 @@
             color: #0f0;
             font-family: 'Orbitron', sans-serif;
             transition: all 0.3s ease;
+            box-sizing: border-box;
         }
 
-        input[type="text"]:focus, input[type="password"]:focus {
+        input[type="text"]:focus, input[type="password"]:focus, input[type="date"]:focus {
             outline: none;
             border-color: #f0f;
             box-shadow: 0 0 10px #f0f;
-        }
-
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .checkbox-group label {
-            margin-left: 10px;
-            color: #0ff;
         }
 
         button {
@@ -159,20 +165,21 @@
             box-shadow: 0 0 20px #0ff;
         }
 
-        .forgot-password {
+        .links {
             text-align: center;
             margin-top: 20px;
             position: relative;
             z-index: 1;
         }
 
-        .forgot-password a {
+        .links a {
             color: #0ff;
             text-decoration: none;
             transition: all 0.3s ease;
+            margin: 0 10px;
         }
 
-        .forgot-password a:hover {
+        .links a:hover {
             color: #f0f;
             text-shadow: 0 0 5px #f0f;
         }
@@ -222,32 +229,126 @@
             80% { clip: rect(67px, 9999px, 93px, 0); }
             100% { clip: rect(28px, 9999px, 59px, 0); }
         }
-    </style>
-</h:head>
+        .language-selector {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
 
+        .language-selector select {
+            padding: 10px;
+            background-color: rgba(0, 255, 255, 0.2);
+            color: #0ff;
+            border: 1px solid #0ff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+    background-repeat: no-repeat;
+    background-position: right 10px top 50%;
+    }
+
+    .language-selector select:hover,
+    .language-selector select:focus {
+        background-color: rgba(255, 0, 255, 0.2);
+        color: #f0f;
+        border-color: #f0f;
+        box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+    }
+
+    .language-selector select option {
+        background-color: #000;
+        color: #0ff;
+    }
+
+    .language-selector select option:hover,
+    .language-selector select option:focus {
+        background-color: #0ff;
+        color: #000;
+    }
+
+    </h:outputStylesheet>
+
+</h:head>
 <h:body>
 <div class="container">
-    <form class="login-form" action="#" method="post">
-        <h2 class="glitch">Acceso Neural</h2>
-        <p class="cyberpunk-quote">"El futuro está aquí, solo que mal distribuido." - William Gibson</p>
+    <h:form id="loginForm" class="cyberpunk-form" >
+        <div class="language-selector">
+            <h:selectOneMenu id="idioma" name="idioma" value="#{idioma.idioma}"  required="true" styleClass="languaje-selector" onchange="submit();">
+                <f:selectItem itemValue="es" itemLabel="Espa&ntilde;ol" />
+                <f:selectItem itemValue="en" itemLabel="English" />
+                <f:selectItem itemValue="zh" itemLabel="中文" />
+                <f:selectItem itemValue="rs" itemLabel="Русский" />
+                <f:selectItem itemValue="it" itemLabel="Italiano" />
+            </h:selectOneMenu>
+
+        </div>
+        <h2 class="glitch" data-text="#{bundle['backup.loginTitle']}"> #{bundle['backup.loginTitle']}  </h2>
         <div class="form-group">
-            <label for="username">ID de Usuario:</label>
-            <input type="text" id="username" name="username"  />
+            <label for="username">#{bundle['backup.username']}</label>
+            <input type="text" id="username" name="username" required="required" />
         </div>
         <div class="form-group">
-            <label for="password">Clave de Acceso:</label>
-            <input type="password" id="password" name="password"  />
+            <label for="password"> #{bundle['backup.password']}</label>
+            <input type="password" id="password" name="password" required="required" />
         </div>
-        <div class="checkbox-group">
-            <input type="checkbox" id="remember" name="remember" />
-            <label for="remember">Mantener conexión neural</label>
+        <button type="submit">#{bundle['backup.button']}</button>
+        <div class="links">
+            <a href="#" onclick="showPasswordRecovery(); return false;">#{bundle['backup.forgotPassword']}</a>
         </div>
-        <button type="submit">Iniciar Sesión</button>
-        <div class="forgot-password">
-            <a href="#">¿Olvidaste tu clave de acceso?</a>
+    </h:form>
+
+    <h:form id="passwordRecoveryForm" class="cyberpunk-form"  style="display: none;" >
+        <h2 class="glitch" data-text="#{bundle['backup.passwordRecoveryTitle']}">#{bundle['backup.passwordRecoveryTitle']}</h2>
+        <div class="form-group">
+            <label for="recoveryName">#{bundle['backup.name']}</label>
+            <input type="text" id="recoveryName" name="recoveryName" required="required" />
         </div>
-    </form>
+        <div class="form-group">
+            <label for="contractDate">#{bundle['backup.contractDate']}</label>
+            <input type="date" id="contractDate" name="contractDate" required="required" />
+        </div>
+        <div class="form-group">
+            <label for="accountNumber">#{bundle['backup.accountNumber']}</label>
+            <input type="text" id="accountNumber" name="accountNumber" required="required" />
+        </div>
+        <div class="form-group">
+            <label for="dni">#{bundle['backup.dni']}</label>
+            <input type="text" id="dni" name="dni" required="required" />
+        </div>
+        <div class="form-group">
+            <label for="newPassword">#{bundle['backup.newPassword']} </label>
+            <input type="password" id="newPassword" name="newPassword" required="required" />
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword">#{bundle['backup.confirmPassword']}</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required="required" />
+        </div>
+        <button type="submit">#{bundle['backup.resetPassword']}</button>
+        <div class="links">
+            <a href="#" onclick="showLogin(); return false;">#{bundle['backup.backToLogin']} </a>
+        </div>
+    </h:form>
 </div>
+
+<script type="text/javascript">
+    //<![CDATA[
+    function showPasswordRecovery() {
+        document.getElementById('loginForm').style.display = 'none';
+        document.getElementById('passwordRecoveryForm').style.display = 'block';
+    }
+
+    function showLogin() {
+        document.getElementById('passwordRecoveryForm').style.display = 'none';
+        document.getElementById('loginForm').style.display = 'block';
+    }
+    //]]>
+</script>
 </h:body>
 </f:view>
 </html>
