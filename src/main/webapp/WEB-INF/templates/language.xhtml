@@ -9,7 +9,7 @@
 <ui:insert name="language">
     <h:form id="languageForm">
         <div class="language-selector">
-            <h:selectOneMenu id="language" name="language" value="#{language.language}"  required="true" styleClass="languaje-selector" onchange="submit();">
+            <h:selectOneMenu id="language" name="language" value="#{language.language}"  required="true" onchange="submit();">
                 <f:selectItem itemValue="es" itemLabel="Espa&ntilde;ol" />
                 <f:selectItem itemValue="en" itemLabel="English" />
                 <f:selectItem itemValue="zh" itemLabel="中文" />
@@ -49,27 +49,11 @@
             scrollbar-width: thin;
             scrollbar-color: #0ff #000;
         }
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background:
-                    linear-gradient(45deg, rgba(255,0,255,0.1) 25%, transparent 25%),
-                    linear-gradient(-45deg, rgba(255,0,255,0.1) 25%, transparent 25%),
-                    linear-gradient(45deg, transparent 75%, rgba(255,0,255,0.1) 75%),
-                    linear-gradient(-45deg, transparent 75%, rgba(255,0,255,0.1) 75%);
-            background-size: 20px 20px;
-            animation: backgroundScroll 10s linear infinite;
-        }
 
         @keyframes backgroundScroll {
             0% { background-position: 0 0, 0 10px, 10px -10px, -10px 0; }
             100% { background-position: -20px -20px, -20px -10px, -10px -30px, -30px -20px; }
         }
-
-
-
 
 
         .language-selector {

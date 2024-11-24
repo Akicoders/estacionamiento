@@ -8,7 +8,10 @@
       xmlns:p="http://primefaces.org/ui">
 <f:view>
     <h:head>
-        <title>Error</title>
+        <title>Alquiler</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&amp;family=Poppins:wght@400;700&amp;display=swap" rel="stylesheet" />
         <h:outputStylesheet>
             @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;display=swap');
 
@@ -29,17 +32,74 @@
             }
 
             .container {
-                max-width: 1200px;
-                margin: 40px auto;
                 background-color: rgba(9, 9, 11, 0.9);
+                max-width: 1300px;
+                margin: 40px auto;
                 border: 2px solid #00ff00;
                 border-radius: 15px;
                 padding: 30px;
                 box-shadow: 0 0 30px #00ff00, 0 0 50px #ff00ff;
                 display: flex;
-                flex-direction: column;
                 align-items: center;
-                backdrop-filter: blur(5px);
+            }
+
+            .nav {
+                width: 100%;
+                margin-top: 1em;
+                display: flex;
+                justify-content: center;
+            }
+
+            .navegacion {
+                background-color: rgba(9, 9, 11);
+                padding: 20px;
+                align-items: center;
+                border-radius: 10px;
+                box-shadow: 0 0 20px #00ff00;
+                width: 80%;
+                display: flex;
+                justify-content: space-around;
+                margin-bottom: 2em;
+            }
+
+            .content-wrapper {
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .image-container {
+                flex: 1;
+                max-width: 45%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
+                position: relative;
+                overflow: hidden;
+                border-radius: 10px;
+            }
+
+            .car-image {
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+                border-radius: 10px;
+                box-shadow: 0 0 25px #00ffff;
+                transition: transform 0.3s ease;
+            }
+
+            .car-image:hover {
+                transform: scale(1.05);
+            }
+
+            .form-container {
+                flex: 1;
+                max-width: 45%;
+                padding: 30px;
+                background-color: rgba(0, 0, 0, 0.7);
+                border-radius: 10px;
+                box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
             }
 
             h1, h2 {
@@ -60,6 +120,11 @@
                 margin-top: 50px;
             }
 
+            .form-group {
+                margin-bottom: 25px;
+                position: relative;
+            }
+
             label {
                 display: block;
                 margin-bottom: 8px;
@@ -69,8 +134,8 @@
                 letter-spacing: 1px;
             }
 
-            input, select {
-                width: 90%;
+            input, select, #fechaHora, #tipoVehiculo, #placa, #dni, #nombreChofer{
+                width: 100%;
                 padding: 12px;
                 border: 1px solid #00ff00;
                 background-color: rgba(0, 255, 0, 0.1);
@@ -81,11 +146,7 @@
                 transition: all 0.3s ease;
             }
 
-            select {
-                width: 95%;
-            }
-
-            input:focus, select:focus {
+            input:focus, select:focus, #fechaHora:focus, #tipoVehiculo:focus, #placa:focus, #dni:focus, #nombreChofer:focus {
                 outline: none;
                 box-shadow: 0 0 15px #00ffff;
                 background-color: rgba(0, 255, 255, 0.1);
@@ -113,17 +174,57 @@
                 transform: translateY(-3px);
             }
 
-            .toggle-switch input {
+            .toggle-container {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 25px;
+            }
+
+            .toggle-switch {
+                position: relative;
+                display: inline-block;
+                width: 60px;
+                height: 34px;
+                margin-right: 10px;
+            }
+
+            .toggle-switch input, .input {
                 opacity: 0;
                 width: 0;
                 height: 0;
             }
 
-            input:checked + .slider {
+            .slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #333;
+                transition: .4s;
+                border-radius: 34px;
+            }
+
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 26px;
+                width: 26px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                transition: .4s;
+                border-radius: 50%;
+            }
+
+            input:checked + .slider{
                 background-color: #00ffff;
             }
 
-            input:checked + .slider:before {
+            input:checked + .slider:before{
                 transform: translateX(26px);
             }
 
@@ -139,9 +240,29 @@
                 font-family: Verdana, sans-serif;
             }
 
-            input:checked + .slider:after {
+            input:checked + .slider:after{
                 content: 'SÍ';
                 left: 30%;
+            }
+
+            .toggle-label {
+                color: #00ffff;
+                font-weight: bold;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+
+            .rental-status {
+                width: 100%;
+                max-width: 800px;
+                margin: 0 auto;
+            }
+
+            .pilot-table {
+                width: 100%;
+                border-collapse: separate;
+                border-spacing: 0 10px;
+                margin-top: 30px;
             }
 
             .pilot-table th, .pilot-table td {
@@ -168,17 +289,107 @@
                 box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
             }
 
+            .status {
+                padding: 5px 10px;
+                border-radius: 20px;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+
+            .status-activo {
+                background-color: #ffff00;
+                color: #000;
+            }
+
+            .status-finalizado {
+                background-color: #00ff00;
+                color: #000;
+            }
+
+            .action-button {
+                background-color: #ff00ff;
+                color: #fff;
+                padding: 8px 12px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 14px;
+                font-weight: bold;
+                text-transform: uppercase;
+                transition: all 0.3s ease;
+                display: inline-block;
+                margin: 2px;
+            }
+
+            .action-button:hover {
+                background-color: #00ffff;
+                box-shadow: 0 0 10px #00ffff;
+            }
+
+            .action-button.disabled {
+                background-color: #666;
+                cursor: not-allowed;
+            }
+
+            .action-button.disabled:hover {
+                background-color: #666;
+                box-shadow: none;
+            }
 
             @media (max-width: 768px) {
                 .container {
                     margin: 20px;
                 }
+                .content-wrapper {
+                    flex-direction: column;
+                }
+                .image-container, .form-container {
+                    max-width: 100%;
+                }
                 h1 {
                     font-size: 2em;
+                }
+                .image-container {
+                    height: 300px;
+                }
+                .pilot-table {
+                    font-size: 14px;
                 }
                 .pilot-table th, .pilot-table td {
                     padding: 10px;
                 }
+                .action-button {
+                    padding: 6px 10px;
+                    font-size: 12px;
+                }
+            }
+
+            .glitch-effect {
+                position: relative;
+            }
+
+            .glitch-effect::before,
+            .glitch-effect::after {
+                content: attr(data-text);
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            .glitch-effect::before {
+                left: 2px;
+                text-shadow: -2px 0 #ff00ff;
+                clip: rect(44px, 450px, 56px, 0);
+                animation: glitch-anim 5s infinite linear alternate-reverse;
+            }
+
+            .glitch-effect::after {
+                left: -2px;
+                text-shadow: -2px 0 #00ffff;
+                clip: rect(44px, 450px, 56px, 0);
+                animation: glitch-anim 5s infinite linear alternate-reverse;
             }
 
             @keyframes glitch-anim {
@@ -190,31 +401,37 @@
                 100% { clip: rect(73px, 9999px, 35px, 0); }
             }
 
+            label.lavado-info{
+                text-align: center;
+                font-size: 10px;
+                color: wheat;
+                padding-top: 10px;
+                margin: 0 0 0 0;
+            }
+
             a {
                 text-decoration: none;
                 color: #ffffff;
-                margin-top: 20em;
             }
 
-            .alert {
-                background-color: #3d0006;
-                color: #eb8791;
-                border: 1px solid #660711;
+            .a:hover {
+                color: #00ffff;
+                text-shadow: 0 0 20px #00ffff;
             }
         </h:outputStylesheet>
     </h:head>
 
     <h:body>
-        <ui:include src="WEB-INF/templates/language.xhtml"></ui:include>
         <ui:include src="WEB-INF/templates/nav.xhtml"></ui:include>
+        <ui:include src="WEB-INF/templates/language.xhtml"></ui:include>
 
         <div class="container">
             <div class="content-wrapper">
                 <div class="image-container">
-                    <img src="img/default.jpg" alt="Foto Principal " class="car-image" id="carImage"/>
+                    <img src="img/default.svg" alt="Foto Principal " class="car-image" id="carImage" />
                 </div>
                 <div class="form-container">
-                    <h1 class="glitch-effect">Guarda tu Coche</h1>
+                    <h1 class="glitch-effect" data-text="Guarda tu Coche">Guarda tu Coche</h1>
                     <form id="reservationForm" action="#" method="post">
                         <div class="form-group">
                             <label for="fechaHora">Fecha y Hora de Reserva:</label>
