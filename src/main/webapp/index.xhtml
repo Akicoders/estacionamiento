@@ -147,7 +147,7 @@
             box-shadow: 0 0 10px #f0f;
         }
 
-        button {
+        button,input[type="submit"] {
             width: 100%;
             padding: 10px;
             background-color: #f0f;
@@ -161,7 +161,7 @@
             z-index: 1;
         }
 
-        button:hover {
+        button:hover, input[type="submit"]:hover {
             background-color: #0ff;
             box-shadow: 0 0 20px #0ff;
         }
@@ -284,14 +284,14 @@
         <div class="form-group">
             <label for="username">#{bundle['backup.username']}</label>
             <p:inputText for="username" id="username" required="required" type="text" value="#{administrador.cuenta}" />
-           <!-- <input type="text" id="username" name="username" required="required" /> -->
         </div>
         <div class="form-group">
             <label for="password"> #{bundle['backup.password']}</label>
             <p:inputText id="password" type="password"  value="#{administrador.clave}" />
-          <!--  <input type="password" id="password" name="password" required="required" /> -->
         </div>
-        <p:commandButton type="submit" action="#{administrador.isValidAdmin()}"> #{bundle['backup.button']} </p:commandButton>
+
+        <h:commandButton type="submit"  action="#{administrador.isValidAdmin()}" value="#{bundle['backup.button']}"  />
+
         <div class="links">
             <a href="#" onclick="showPasswordRecovery(); return false;">#{bundle['backup.forgotPassword']}</a>
         </div>
@@ -301,27 +301,29 @@
         <h2 class="glitch" data-text="#{bundle['backup.passwordRecoveryTitle']}">#{bundle['backup.passwordRecoveryTitle']}</h2>
         <div class="form-group">
             <label for="recoveryName">#{bundle['backup.name']}</label>
-            <input type="text" id="recoveryName" name="recoveryName" required="required" />
+            <p:inputText type="text" id="recoveryName" name="recoveryName" required="required" value="#{administrador.nombre}" />
         </div>
         <div class="form-group">
             <label for="contractDate">#{bundle['backup.contractDate']}</label>
-            <input type="date" id="contractDate" name="contractDate" required="required" />
+            <p:inputText type="date" id="contractDate" name="contractDate" required="required" value="#{administrador.fechaContrato}"
+
+            />
         </div>
         <div class="form-group">
             <label for="accountNumber">#{bundle['backup.accountNumber']}</label>
-            <input type="text" id="accountNumber" name="accountNumber" required="required" />
+            <p:inputText type="text" id="accountNumber" name="accountNumber" required="required" value="#{administrador.cuenta}" />
         </div>
         <div class="form-group">
             <label for="dni">#{bundle['backup.dni']}</label>
-            <input type="text" id="dni" name="dni" required="required" />
+            <p:inputText type="text" id="dni" name="dni" required="required" value="#{administrador.dni}" />
         </div>
         <div class="form-group">
             <label for="newPassword">#{bundle['backup.newPassword']} </label>
-            <input type="password" id="newPassword" name="newPassword" required="required" />
+            <p:inputText type="password" id="newPassword" name="newPassword" required="required" value="#{administrador.clave}"/>
         </div>
         <div class="form-group">
             <label for="confirmPassword">#{bundle['backup.confirmPassword']}</label>
-            <input type="password" id="confirmPassword" name="confirmPassword" required="required" />
+            <p:inputText type="password" id="confirmPassword" name="confirmPassword" required="required"  />
         </div>
         <button type="submit">#{bundle['backup.resetPassword']}</button>
         <div class="links">
