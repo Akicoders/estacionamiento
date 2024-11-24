@@ -3,6 +3,7 @@ package pe.edu.utp.ftags.faces;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -72,8 +73,9 @@ public class Administrador implements Serializable {
     public void setEstacionamiento(Estacionamiento estacionamiento) {
         this.estacionamiento = estacionamiento;
     }
-    public String isValidAdmin(){
-        boolean valid_admin = (cuenta.equals("carlitos") && clave.equals("123")) ? true: false;
+
+    public String isValidAdmin() throws IOException {
+        boolean valid_admin = AdministradorDAO.validarAdministrador(cuenta, clave);
         if (valid_admin) {
             return "form?faces-redirect=true";
         }else{

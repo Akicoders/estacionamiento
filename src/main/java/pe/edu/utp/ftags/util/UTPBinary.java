@@ -120,17 +120,27 @@ public class UTPBinary {
         return bb.getShort();
     }
 
-    public static byte[] md5(byte[] data) throws DigestException, NoSuchAlgorithmException {
-        try{
+    public static String md5(String input) throws NoSuchAlgorithmException {
+        try {
+            // Obtén la instancia del algoritmo MD5
             MessageDigest md = MessageDigest.getInstance("MD5");
-            MessageDigest msg = (MessageDigest) md.clone();
-            msg.update(data);
-            return msg.digest();
-        } catch (CloneNotSupportedException e) {
-            throw new DigestException("No se pudo obtener el message digest:" + e.getMessage());
-        }catch (NoSuchAlgorithmException e) {
-            throw new NoSuchAlgorithmException("Algoritmo MD5 no fue encontrado");
+            // Convierte la entrada (contraseña) a bytes y calcula el hash
+            byte[] hashBytes = md.digest(input.getBytes());
+
+            // Convierte el hash a formato hexadecimal
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hashBytes) {
+                // Aplica la conversión a dos dígitos hexadecimales por cada byte
+                String hex = Integer.toHexString(0xFF & b);
+                if (hex.length() == 1) {
+                    hexString.append('0');
+                }
+                hexString.append(hex);
+            }
+
+            return hexString.toString(); // Devuelve el hash en formato hexadecimal
+        } catch (NoSuchAlgorithmException e) {
+            throw new NoSuchAlgorithmException("El algoritmo MD5 no fue encontrado.");
         }
     }
-
 }
