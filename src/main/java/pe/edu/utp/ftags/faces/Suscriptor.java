@@ -8,13 +8,21 @@ import java.io.Serializable;
 @SessionScoped
 public class Suscriptor implements Serializable {
 
-    public String dni;
-    public String placa;
-    public String tarjeta;
-    public Suscripcion detalle_suscripcion;
-    public String codigo_sorteo;
-    public String plan;
+    private String dni;
+    private String placa;
+    private String tarjeta;
+    private Suscripcion detalle_suscripcion;
+    private String codigo_sorteo;
+    private String plan;
 
+    public Suscriptor() {
+        this.dni = "";
+        this.placa = "";
+        this.tarjeta = "";
+        this.detalle_suscripcion = null;
+        this.codigo_sorteo = "";
+        this.plan = "";
+    }
 
     public Suscriptor(String plan, String tarjeta, String placa, String dni) {
         this.plan = plan;

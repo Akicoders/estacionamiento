@@ -11,6 +11,11 @@ public class Suscripcion implements SuscripcionPrototype {
     private String nombre;
     private float precio;
 
+    public Suscripcion() {
+        this.nombre = "";
+        this.precio = 0;
+    }
+
     public Suscripcion(String nombre, int precio) {
         this.nombre = nombre;
         this.precio = precio;
