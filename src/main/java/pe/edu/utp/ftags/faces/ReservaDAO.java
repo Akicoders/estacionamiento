@@ -1,6 +1,7 @@
 package pe.edu.utp.ftags.faces;
 import pe.edu.utp.ftags.model.RegistroEntrada;
 import pe.edu.utp.ftags.model.RegistroSalida;
+import pe.edu.utp.ftags.model.Salida;
 import pe.edu.utp.ftags.model.TipoVehiculo;
 import pe.edu.utp.ftags.services.AppConfig;
 import pe.edu.utp.ftags.util.DataAccessMariaDB;
@@ -90,10 +91,10 @@ public class ReservaDAO implements Serializable {
         return lista_Salida;
     }
 
-    public static RegistroEntrada getConductorporId(int ID) throws IOException {
+    public RegistroEntrada getConductorporId(int ID) throws IOException {
         RegistroEntrada driver = null;
 
-        String strSQL = String.format("CALL MostrarConductorporId(%s)", ID);
+        String strSQL = String.format("CALL pr_MostrarConductorporId(%s)", ID);
         log.info(strSQL);
         try {
             Connection cnn = DataAccessMariaDB.getConnection(DataAccessMariaDB.TipoDA.DATASOURCE, AppConfig.getDatasource());
@@ -148,7 +149,7 @@ public class ReservaDAO implements Serializable {
         }
     }
 
-    public static void newRegistroSalida(Salida salida) throws IOException {
+    public void newRegistroSalida(Salida salida) throws IOException {
         String strSQL = String.format("CALL pr_RegistrarSalida(%s, '%s', '%s', '%s', %s, '%s', '%s', %.2f, %s, %s)", salida.getIdRegistroEntrada(), salida.getNombreConductor(),
                 salida.getTipoVehiculo(), salida.getPlaca(), salida.getLavado(), salida.getFechaHoraEntrada(),
                 salida.getFechaHoraSalida(), salida.getTotal(), salida.getIdConductor(), salida.getIdVehiculo());
@@ -166,7 +167,7 @@ public class ReservaDAO implements Serializable {
         }
     }
 
-    public static double getTotal(LocalDateTime fechaEntrada, boolean lavado) throws IOException {
+    public double getTotal(LocalDateTime fechaEntrada, boolean lavado) throws IOException {
         double cobroPorHora = 5;
         double cobroPorDia = 120;
         Duration duracion = Duration.between(fechaEntrada, LocalDateTime.now());

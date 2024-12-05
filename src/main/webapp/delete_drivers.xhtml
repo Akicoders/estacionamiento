@@ -31,7 +31,7 @@
             }
 
             .container {
-                max-width: 1200px;
+                max-width: 1300px;
                 margin: 40px auto;
                 border-radius: 15px;
                 padding: 30px;
@@ -95,7 +95,7 @@
                 flex: 1;
                 max-width: 45%;
                 padding: 30px;
-                background-color: rgba(0, 0, 0);
+                background-color: rgba(0, 0, 0, 0.7);
                 border-radius: 10px;
                 box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
             }
@@ -133,22 +133,16 @@
             }
 
             input, select {
-                width: 90%;
-                padding: 12px;
-                border: 1px solid #00ff00;
-                background-color: rgba(0, 255, 0, 0.1);
-                color: #00ff00;
-                border-radius: 5px;
-                font-family: 'Orbitron', sans-serif;
-                font-size: 16px;
-                transition: all 0.3s ease;
+                width: 100% !important;
+                padding: 12px !important;
+                border: 1px solid #00ff00 !important;
+                background-color: rgba(0, 255, 0, 0.1) !important;
+                font-family: 'Orbitron', sans-serif !important;
+                color: #00ff00 !important;
+                border-radius: 5px !important;
             }
 
-            select {
-                width: 95%;
-            }
-
-            input:focus, select:focus {
+            input:focus, select:focus, #nombreChofer:focus, #txtId:focus, #fechaHora:focus, #tipoVehiculo:focus, #placa:focus, #dni:focus, #lavadoAuto:focus {
                 outline: none;
                 box-shadow: 0 0 15px #00ffff;
                 background-color: rgba(0, 255, 255, 0.1);
@@ -168,7 +162,6 @@
                 letter-spacing: 2px;
                 transition: all 0.3s ease;
                 box-shadow: 0 0 15px #ff00ff;
-                margin-top: 2em;
             }
 
             button:hover {
@@ -193,7 +186,7 @@
                 margin-right: 10px;
             }
 
-            .toggle-switch input {
+            .toggle-switch input, .input {
                 opacity: 0;
                 width: 0;
                 height: 0;
@@ -223,11 +216,11 @@
                 border-radius: 50%;
             }
 
-            input:checked + .slider {
+            input:checked + .slider{
                 background-color: #00ffff;
             }
 
-            input:checked + .slider:before {
+            input:checked + .slider:before{
                 transform: translateX(26px);
             }
 
@@ -243,7 +236,7 @@
                 font-family: Verdana, sans-serif;
             }
 
-            input:checked + .slider:after {
+            input:checked + .slider:after{
                 content: 'SÍ';
                 left: 30%;
             }
@@ -424,73 +417,71 @@
         </h:outputStylesheet>
     </h:head>
     <h:body>
+        <ui:include src="WEB-INF/templates/nav.xhtml"></ui:include>
         <ui:include src="WEB-INF/templates/language.xhtml"></ui:include>
         <div class="container">
             <div class="content-wrapper">
                 <div class="form-container">
                     <h1 class="glitch-effect" data-text="Culminar estacionamiento">Culminar estacionamiento</h1>
-                    <h:form id="reservationForm" action="#" method="post">
+                    <h:form id="reservationForm" action="#{culminarEstacionamientoFace.finalizarEstacionamiento}" method="post">
 
-                        RegistroEntrada driver = ReservaDAO.getConductorporId(id);
-
-                        <div class="form-group" style="display: flex; justify-content: space-between; ">
+                        <div class="form-group" style="display: flex; justify-content: space-between; gap: 2rem;">
                             <div>
                                 <label for="nombreChofer">Nombre del Piloto:</label>
                                 <p:inputText type="text" id="nombreChofer" required="true"
-                                             requiredMessage="Ingrese una DNI válida"
-                                             validatorMessage="Ingrese un DNI válido (8 números seguidos)" value="#{registroEntrada.dni}" />
+                                             requiredMessage="Ingrese nombre"
+                                             validatorMessage="Ingrese nombre" value="#{culminarEstacionamientoFace.registroSeleccionado.nombreConductor}" />
                             </div>
                             <div>
                                 <label for="txtId">ID:</label>
                                 <p:inputText type="text" id="txtId" required="true"
                                              requiredMessage="Enter driver ID"
-                                             validatorMessage="Enter driver ID" value="#{registroEntrada.idRegistroEntrada}" />
+                                             validatorMessage="Enter driver ID" value="#{culminarEstacionamientoFace.registroSeleccionado.idRegistroEntrada}" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="fechaHora">Fecha y Hora de Reserva:</label>
                             <p:inputText type="text" id="fechaHora" required="true"
                                          requiredMessage="Fecha Registrada"
-                                         validatorMessage="Fecha Registrada" value="#{registroEntrada.fechaHoraEntrada}" />
+                                         validatorMessage="Fecha Registrada" value="#{culminarEstacionamientoFace.registroSeleccionado.fechaHoraEntrada}" />
                         </div>
                         <div class="form-group">
                             <label for="tipoVehiculo">Tipo de Vehículo:</label>
-                            <p:inputText type="datetime-local" id="tipoVehiculo" required="true"
+                            <p:inputText type="text" id="tipoVehiculo" required="true"
                                          requiredMessage="Enter type of vehicle"
-                                         validatorMessage="Enter type of vehicle" value="#{registroEntrada.tipoVehiculo}" />
+                                         validatorMessage="Enter type of vehicle" value="#{culminarEstacionamientoFace.registroSeleccionado.tipoVehiculo}" />
                         </div>
                         <div class="form-group">
                             <label for="placa">Número de Placa:</label>
                             <p:inputText type="text" id="placa" required="true"
                                          requiredMessage="Enter vehicle license plate"
-                                         validatorMessage="Enter vehicle license plate" value="#{registroEntrada.placa}" />
+                                         validatorMessage="Enter vehicle license plate" value="#{culminarEstacionamientoFace.registroSeleccionado.placa}" />
                         </div>
                         <div class="form-group">
                             <label for="dni">DNI del Piloto:</label>
                             <p:inputText type="text" id="dni" required="true"
                                          requiredMessage="Enter driver document"
-                                         validatorMessage="Enter driver document" value="#{registroEntrada.dni}" />
+                                         validatorMessage="Enter driver document" value="#{culminarEstacionamientoFace.registroSeleccionado.dni}" />
                         </div>
                         <div class="form-group">
                             <label for="lavadoAuto">Lavado de auto:</label>
                             <p:inputText type="text" id="lavadoAuto" required="true"
                                          requiredMessage="Enter vehicle washing"
-                                         validatorMessage="Enter vehicle washing" value="#{registroEntrada.lavado}" />
+                                         validatorMessage="Enter vehicle washing" value="#{culminarEstacionamientoFace.registroSeleccionado.lavado}" />
                         </div>
                         <div class="form-group" style="display: none">
                             <label for="txtIdConductor">ID Conductor:</label>
                             <p:inputText type="text" id="txtIdConductor" required="true"
                                          requiredMessage="Enter driver ID"
-                                         validatorMessage="Enter driver ID" value="#{registroEntrada.idConductor}" />
+                                         validatorMessage="Enter driver ID" value="#{culminarEstacionamientoFace.registroSeleccionado.idConductor}" />
                         </div>
                         <div class="form-group" style="display: none">
                             <label for="txtIdVehiculo">ID Vehiculo:</label>
                             <p:inputText type="text" id="txtIdVehiculo" required="true"
                                          requiredMessage="Enter vehicle ID"
-                                         validatorMessage="Enter vehicle ID" value="#{registroEntrada.idVehiculo}" />
+                                         validatorMessage="Enter vehicle ID" value="#{culminarEstacionamientoFace.registroSeleccionado.idVehiculo}" />
                         </div>
-                        <
-                        <button type="submit">Culminar</button>
+                        <button type="submit" >Culminar</button>
                     </h:form>
                 </div>
             </div>
