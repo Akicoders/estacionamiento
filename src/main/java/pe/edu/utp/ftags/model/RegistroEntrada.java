@@ -1,14 +1,8 @@
-package pe.edu.utp.ftags.faces;
+package pe.edu.utp.ftags.model;
 
-import pe.edu.utp.ftags.model.TipoVehiculo;
-
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-@ManagedBean
-@SessionScoped
 public class RegistroEntrada implements Serializable {
 
     private int idRegistroEntrada;

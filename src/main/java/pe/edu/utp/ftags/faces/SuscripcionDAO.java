@@ -3,6 +3,7 @@ package pe.edu.utp.ftags.faces;
 
 import pe.edu.utp.ftags.services.AppConfig;
 import pe.edu.utp.ftags.util.DataAccessMariaDB;
+import pe.edu.utp.ftags.model.Suscriptor;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -42,7 +43,7 @@ public class SuscripcionDAO implements Serializable {
     }
 
     //conseguir las suscripciones :D
-    public static List<Suscriptor> getSuscripciones() throws IOException {
+    public List<Suscriptor> getSuscripciones() throws IOException {
         List<Suscriptor> lista_suscriptor = new ArrayList<>();
         String strSQL = String.format("CALL mostrar_suscripciones()");
         log.info(strSQL);

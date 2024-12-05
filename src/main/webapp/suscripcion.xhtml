@@ -370,26 +370,37 @@
                 <p>Al estar suscripto te llevaras un codigo para participar en el gran sorteo del leoncito de Akicoders!!! No te lo puedes perder.</p>
             </div>
 
-
             <h2 class="glitch-effect" data-text="Nuestros Suscriptores">Nuestros Suscriptores</h2>
-            <table class="subscribers-table">
+            <h:dataTable value="#{carouselSuscriptorFace.suscriptorList}" var="suscriptor" class="subscribers-table">
                 <thead>
                 <tr>
-                    <th>DNI</th>
-                    <th>Placa</th>
-                    <th>Plan de Suscripción</th>
-                    <th>Código de Sorteo</th>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="DNI" />
+                        </f:facet>
+                        <h:outputText value="#{suscriptor.dni}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Placa" />
+                        </f:facet>
+                        <h:outputText value="#{suscriptor.placa}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Plan de Suscripción" />
+                        </f:facet>
+                        <h:outputText value="#{suscriptor.detalle_suscripcion.nombre.toUpperCase()}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Código de Sorteo" />
+                        </f:facet>
+                        <h:outputText value="#{suscriptor.codigo_sorteo}" />
+                    </h:column>
                 </tr>
                 </thead>
-                <tbody id="subscribersTableBody">
-                <tr>
-                    <td>#{suscriptor.dni} </td>
-                    <td>#{suscriptor.placa} </td>
-                    <td>#{suscriptor.detalle_suscripcion.nombre.toUpperCase()}</td>
-                    <td>#{suscriptor.codigo_sorteo}</td>
-                </tr>
-                </tbody>
-            </table>
+            </h:dataTable>
 
             <div class="coming-soon">
                 <p>Coming Soon: Estamos trabajando en el sorteo. ¡Mantente atento para más novedades!</p>

@@ -1,8 +1,7 @@
 package pe.edu.utp.ftags.faces;
-
-
-
-import pe.edu.utp.ftags.model.*;
+import pe.edu.utp.ftags.model.RegistroEntrada;
+import pe.edu.utp.ftags.model.RegistroSalida;
+import pe.edu.utp.ftags.model.TipoVehiculo;
 import pe.edu.utp.ftags.services.AppConfig;
 import pe.edu.utp.ftags.util.DataAccessMariaDB;
 
@@ -24,11 +23,11 @@ import java.util.logging.Logger;
 @SessionScoped
 public class ReservaDAO implements Serializable {
     private static final Logger log = Logger.getLogger("pe.edu.utp.estacionamiento");
-    
-    public static List<RegistroEntrada> getRegistroEntrada() throws IOException {
+
+    public List<RegistroEntrada> getRegistroEntrada() throws IOException {
         List<RegistroEntrada> lista_Entradas = new ArrayList<>();
 
-        String strSQL = String.format("CALL MostrarRegistrosEntrada()");
+        String strSQL = String.format("CALL pr_MostrarRegistrosEntrada()");
         log.info(strSQL);
         try {
             Connection cnn = DataAccessMariaDB.getConnection(DataAccessMariaDB.TipoDA.DATASOURCE, AppConfig.getDatasource());
@@ -58,10 +57,10 @@ public class ReservaDAO implements Serializable {
         return lista_Entradas;
     }
 
-    public static List<RegistroSalida> getRegistroSalida() throws IOException {
+    public List<RegistroSalida> getRegistroSalida() throws IOException {
         List<RegistroSalida> lista_Salida = new LinkedList<>();
 
-        String strSQL = String.format("CALL MostrarRegistrosSalida()");
+        String strSQL = String.format("CALL pr_MostrarRegistrosSalida()");
         log.info(strSQL);
         try {
             Connection cnn = DataAccessMariaDB.getConnection(DataAccessMariaDB.TipoDA.DATASOURCE, AppConfig.getDatasource());

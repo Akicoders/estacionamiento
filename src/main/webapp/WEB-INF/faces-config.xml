@@ -17,4 +17,10 @@
         </locale-config>
     </application>
 
+    <managed-bean>
+        <managed-bean-name>reservaDAO</managed-bean-name>
+        <managed-bean-class>pe.edu.utp.ftags.faces.ReservaDAO</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
 </faces-config>
