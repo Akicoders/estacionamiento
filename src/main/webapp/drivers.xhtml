@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 <f:view contentType="text/html">
     <h:head>
         <title>Estacionamiento de Coches Cyberpunk 2077 - Estado de Conductores</title>
@@ -433,37 +434,37 @@
                             <f:facet name="header">
                                 <h:outputText value="Piloto" />
                             </f:facet>
-                            <h:outputText value="#{registro.nombreConductor}" />
+                            <h:outputText value="#{registro.nombreConductor}" rendered="true" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="Vehículo" />
                             </f:facet>
-                            <h:outputText value="#{registro.tipoVehiculo.name()}" />
+                            <h:outputText value="#{registro.tipoVehiculo.name()}" rendered="true" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="Placa" />
                             </f:facet>
-                            <h:outputText value="#{registro.placa}" />
+                            <h:outputText value="#{registro.placa}" rendered="true" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="Fecha y Hora" />
                             </f:facet>
-                            <h:outputText value="#{registro.fechaHoraEntrada}" />
+                            <h:outputText value="#{registro.fechaHoraEntrada}" rendered="true" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="Lavado" />
                             </f:facet>
-                            <h:outputText value="#{registro.lavado}" />
+                            <h:outputText value="#{registro.lavado}" rendered="true" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="Acciones" />
                             </f:facet>
-                            <a href="delete_drivers.xhtml?txtId=#{registro.idRegistroEntrada}">
+                            <a href="delete_drivers.xhtml?txtId=#{registro.idRegistroEntrada}"  >
                                 <button>Finalizar</button>
                             </a>
                         </h:column>
@@ -472,56 +473,56 @@
                 </h:dataTable>
 
                 <h2 class="glitch-effect">Alquileres Finalizados</h2>
-                <h:dataTable value="#{carouselRegistroSalidaFace.registroSalidaList}" var="registros" class="pilot-table">
+                <h:dataTable value="#{carouselRegistroSalidaFace.registroSalidaList}" var="registros" class="pilot-table" rendered="true">
                     <thead>
                     <tr>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="Estacionamiento" />
                             </f:facet>
-                            <h:outputText value="#{registros.nombreEstacionamiento}" />
+                            <h:outputText value="#{registros.nombreEstacionamiento}" rendered="true" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="Piloto" />
                             </f:facet>
-                            <h:outputText value="#{registros.nombreConductor}" />
+                            <h:outputText value="#{registros.nombreConductor}" rendered="true" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="Vehículo" />
                             </f:facet>
-                            <h:outputText value="#{registros.tipoVehiculo.name()}" />
+                            <h:outputText value="#{registros.tipoVehiculo.name()}" rendered="true" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="Placa" />
                             </f:facet>
-                            <h:outputText value="#{registros.placa}" />
+                            <h:outputText value="#{registros.placa}" rendered="true" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="Lavado" />
                             </f:facet>
-                            <h:outputText value="#{registros.lavado}" />
+                            <h:outputText value="#{registros.lavado}" rendered="true" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="Fecha y Hora de Entrada" />
                             </f:facet>
-                            <h:outputText value="#{registros.fechaHoraEntrada}" />
+                            <h:outputText value="#{registros.fechaHoraEntrada}" rendered="true" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="Fecha y Hora de Salida" />
                             </f:facet>
-                            <h:outputText value="#{registros.fechaHoraSalida}" />
+                            <h:outputText value="#{registros.fechaHoraSalida}" rendered="true" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="Total" />
                             </f:facet>
-                            <h:outputText value="#{registros.total}" />
+                            <h:outputText value="#{registros.total}" rendered="true" />
                         </h:column>
                     </tr>
                     </thead>

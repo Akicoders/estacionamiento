@@ -12,6 +12,7 @@ import java.util.List;
 public class CarouselRegistroEntradaFace {
     private List<RegistroEntrada> registroEntradaList;
 
+
     public CarouselRegistroEntradaFace() throws IOException  {
         ReservaDAO reservaDAO = new ReservaDAO();
         this.registroEntradaList = reservaDAO.getRegistroEntrada();

@@ -8,6 +8,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Map;
 
 @ManagedBean
@@ -16,6 +17,7 @@ public class culminarEstacionamientoFace {
 
     private int idRegistro;
     private RegistroEntrada registroSeleccionado;
+    private String fechaHoraEntradaString;
 
     public culminarEstacionamientoFace() throws IOException {
         String idParam = FacesContext.getCurrentInstance().getExternalContext()
@@ -28,34 +30,41 @@ public class culminarEstacionamientoFace {
         if (idRegistro != 0) {
             ReservaDAO reservaDAO = new ReservaDAO();
             this.registroSeleccionado = reservaDAO.getConductorporId(idRegistro);
+
+            if (registroSeleccionado.getFechaHoraEntrada() != null) {
+                this.fechaHoraEntradaString = registroSeleccionado.getFechaHoraEntrada().toString();
+            }
         }
     }
 
-    public void finalizarEstacionamiento() throws IOException {
+    public void finalizarEstacionamiento() throws IOException, IllegalArgumentException {
         ReservaDAO reservaDAO = new ReservaDAO();
         String lavadito = registroSeleccionado.getLavado();
+
+        LocalDateTime fechaHoraEntrada = LocalDateTime.parse(fechaHoraEntradaString);
 
         boolean lavado = false;
         if (lavadito != null) {
             lavado = lavadito.equalsIgnoreCase("si");
         }
 
-        Salida salida = new Salida();
-        salida.setIdRegistroEntrada(registroSeleccionado.getIdRegistroEntrada());
-        salida.setNombreConductor(registroSeleccionado.getNombreConductor());
-        salida.setTipoVehiculo(registroSeleccionado.getTipoVehiculo());
-        salida.setPlaca(registroSeleccionado.getPlaca());
-        salida.setLavado(lavado);
-        salida.setFechaHoraEntrada(registroSeleccionado.getFechaHoraEntrada());
-        salida.setFechaHoraSalida(LocalDateTime.now());
-        salida.setTotal(reservaDAO.getTotal(registroSeleccionado.getFechaHoraEntrada(), lavado));
-        salida.setIdConductor(registroSeleccionado.getIdConductor());
-        salida.setIdVehiculo(registroSeleccionado.getIdVehiculo());
+        Salida salidaDriver = new Salida();
+        salidaDriver.setIdRegistroEntrada(registroSeleccionado.getIdRegistroEntrada());
+        salidaDriver.setNombreConductor(registroSeleccionado.getNombreConductor());
+        salidaDriver.setTipoVehiculo(registroSeleccionado.getTipoVehiculo());
+        salidaDriver.setPlaca(registroSeleccionado.getPlaca());
+        salidaDriver.setLavado(lavado);
+        salidaDriver.setFechaHoraEntrada(fechaHoraEntrada);
+        salidaDriver.setFechaHoraSalida(LocalDateTime.now());
+        salidaDriver.setTotal(reservaDAO.getTotal(fechaHoraEntrada, lavado));
+        salidaDriver.setIdConductor(registroSeleccionado.getIdConductor());
+        salidaDriver.setIdVehiculo(registroSeleccionado.getIdVehiculo());
 
-        reservaDAO.newRegistroSalida(salida);
+        reservaDAO.newRegistroSalida(salidaDriver);
+
+        FacesContext.getCurrentInstance().getExternalContext().redirect("src/main/webapp/drivers.xhtml");
     }
 
-    // Getters y setters
     public int getIdRegistro() {
         return idRegistro;
     }
@@ -70,6 +79,14 @@ public class culminarEstacionamientoFace {
 
     public void setRegistroSeleccionado(RegistroEntrada registroSeleccionado) {
         this.registroSeleccionado = registroSeleccionado;
+    }
+
+    public String getFechaHoraEntradaString() {
+        return fechaHoraEntradaString;
+    }
+
+    public void setFechaHoraEntradaString(String fechaHoraEntradaString) {
+        this.fechaHoraEntradaString = fechaHoraEntradaString;
     }
 
 }
