@@ -101,4 +101,6 @@ public class Reserva implements Serializable {
     public void setLavado(boolean lavado) {
         this.lavado = lavado;
     }
+
+
 }

@@ -427,106 +427,107 @@
         <div class="container" style="padding: 2em">
             <div class="rental-status">
                 <h2 class="glitch-effect">Estado de Alquileres</h2>
-                <h:dataTable value="#{carouselRegistroEntradaFace.registroEntradaList}" var="registro" class="pilot-table">
+                <h:form id="driversForm" >
+                <p:dataTable value="#{carouselRegistroEntradaFace.registroEntradaList}" var="item" class="pilot-table">
                     <thead>
                     <tr>
-                        <h:column>
+                        <p:column>
                             <f:facet name="header">
-                                <h:outputText value="Piloto" />
+                                Piloto
                             </f:facet>
-                            <h:outputText value="#{registro.nombreConductor}" rendered="true" />
-                        </h:column>
-                        <h:column>
+                            <h:outputText value="#{item.nombreConductor}" rendered="true" />
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
-                                <h:outputText value="Vehículo" />
+                                Vehiculo
                             </f:facet>
-                            <h:outputText value="#{registro.tipoVehiculo.name()}" rendered="true" />
-                        </h:column>
-                        <h:column>
+                            <h:outputText value="#{item.tipoVehiculo}" rendered="true" />
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Placa" />
                             </f:facet>
-                            <h:outputText value="#{registro.placa}" rendered="true" />
-                        </h:column>
-                        <h:column>
+                            <h:outputText value="#{item.placa}" rendered="true" />
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Fecha y Hora" />
                             </f:facet>
-                            <h:outputText value="#{registro.fechaHoraEntrada}" rendered="true" />
-                        </h:column>
-                        <h:column>
+                            <h:outputText value="#{item.fechaHoraEntrada}" rendered="true" />
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Lavado" />
                             </f:facet>
-                            <h:outputText value="#{registro.lavado}" rendered="true" />
-                        </h:column>
-                        <h:column>
+                            <h:outputText value="#{item.lavado}" rendered="true"  />
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Acciones" />
                             </f:facet>
-                            <a href="delete_drivers.xhtml?txtId=#{registro.idRegistroEntrada}"  >
-                                <button>Finalizar</button>
-                            </a>
-                        </h:column>
+                            <p:commandButton value="Finalizar" action="#{carouselRegistroEntradaFace.}" rendered="true" update="driversForm" />
+                        </p:column>
                     </tr>
                     </thead>
-                </h:dataTable>
-
+                </p:dataTable>
+                </h:form>
+                <!---
                 <h2 class="glitch-effect">Alquileres Finalizados</h2>
                 <h:dataTable value="#{carouselRegistroSalidaFace.registroSalidaList}" var="registros" class="pilot-table" rendered="true">
                     <thead>
                     <tr>
-                        <h:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Estacionamiento" />
                             </f:facet>
                             <h:outputText value="#{registros.nombreEstacionamiento}" rendered="true" />
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Piloto" />
                             </f:facet>
                             <h:outputText value="#{registros.nombreConductor}" rendered="true" />
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Vehículo" />
                             </f:facet>
                             <h:outputText value="#{registros.tipoVehiculo.name()}" rendered="true" />
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Placa" />
                             </f:facet>
                             <h:outputText value="#{registros.placa}" rendered="true" />
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Lavado" />
                             </f:facet>
                             <h:outputText value="#{registros.lavado}" rendered="true" />
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Fecha y Hora de Entrada" />
                             </f:facet>
                             <h:outputText value="#{registros.fechaHoraEntrada}" rendered="true" />
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Fecha y Hora de Salida" />
                             </f:facet>
                             <h:outputText value="#{registros.fechaHoraSalida}" rendered="true" />
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Total" />
                             </f:facet>
                             <h:outputText value="#{registros.total}" rendered="true" />
-                        </h:column>
+                        </p:column>
                     </tr>
                     </thead>
                 </h:dataTable>
+                -->
             </div>
         </div>
     </h:body>
