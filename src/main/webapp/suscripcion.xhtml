@@ -371,36 +371,38 @@
             </div>
 
             <h2 class="glitch-effect" data-text="Nuestros Suscriptores">Nuestros Suscriptores</h2>
-            <h:dataTable value="#{carouselSuscriptorFace.suscriptorList}" var="suscriptor" class="subscribers-table">
+            <h:form id="suscripForm" rendered="true" >
+            <h:dataTable value="#{carouselSuscriptorFace.suscriptorList}" var="suscriptor" class="subscribers-table" rendered="true">
                 <thead>
                 <tr>
-                    <h:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="DNI" />
                         </f:facet>
-                        <h:outputText value="#{suscriptor.dni}" />
-                    </h:column>
-                    <h:column>
+                        <h:outputText value="#{suscriptor.dni}" rendered="true" />
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="Placa" />
                         </f:facet>
-                        <h:outputText value="#{suscriptor.placa}" />
-                    </h:column>
-                    <h:column>
+                        <h:outputText value="#{suscriptor.placa}" rendered="true" />
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
-                            <h:outputText value="Plan de Suscripción" />
+                            <h:outputText value="Plan de Suscripción" rendered="true" />
                         </f:facet>
-                        <h:outputText value="#{suscriptor.detalle_suscripcion.nombre.toUpperCase()}" />
-                    </h:column>
-                    <h:column>
+                        <h:outputText value="#{suscriptor.detalle_suscripcion.nombre.toUpperCase()}" rendered="true" />
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="Código de Sorteo" />
                         </f:facet>
-                        <h:outputText value="#{suscriptor.codigo_sorteo}" />
-                    </h:column>
+                        <h:outputText value="#{suscriptor.codigo_sorteo}" rendered="true" />
+                    </p:column>
                 </tr>
                 </thead>
             </h:dataTable>
+            </h:form>
 
             <div class="coming-soon">
                 <p>Coming Soon: Estamos trabajando en el sorteo. ¡Mantente atento para más novedades!</p>
