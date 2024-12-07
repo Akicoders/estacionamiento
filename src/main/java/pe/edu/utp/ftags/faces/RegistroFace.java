@@ -21,7 +21,6 @@ public class RegistroFace {
 
     private Reserva registroIngresado;
     private TipoVehiculo[] tiposVehiculo;
-    private Reserva reserva;
 
     public RegistroFace() {
         registroIngresado = new Reserva();
@@ -34,7 +33,6 @@ public class RegistroFace {
         try {
 
             String lavado = registroIngresado.isLavado() ? "lavado" : "nolavado";
-
             //Validator.validarConductor(registroIngresado.getNombreConductor(), dni, registroIngresado.getPlaca(), registroIngresado.getTipoVehiculo(), entrada);
 
             boolean reserva_regular = lavado.equalsIgnoreCase("nolavado");

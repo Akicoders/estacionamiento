@@ -162,42 +162,42 @@
                 font-size: 18px;
             }
 
-            .form-group input, .form-group select {
-                width: 100%;
-                padding: 12px;
-                border: 1px solid var(--primary-color);
-                background-color: rgba(0, 255, 0, 0.1);
-                color: var(--primary-color);
-                border-radius: 5px;
-                font-family: 'Orbitron', sans-serif;
-                font-size: 16px;
-                box-sizing: border-box;
+            .form-group input, .form-group select, #plan {
+                width: 100% !important;
+                padding: 12px !important;
+                border: 1px solid var(--primary-color) !important;
+                background-color: rgba(0, 255, 0, 0.1) !important;
+                color: var(--primary-color) !important;
+                border-radius: 5px !important;
+                font-family: 'Orbitron', sans-serif !important;
+                font-size: 16px !important;
+                box-sizing: border-box !important;
             }
 
-            .form-group input:focus, .form-group select:focus {
-                outline: none;
-                box-shadow: 0 0 10px var(--tertiary-color);
+            .form-group input:focus, .form-group select:focus, #plan:focus {
+                outline: none !important;
+                box-shadow: 0 0 10px var(--tertiary-color) !important;
             }
 
             .submit-btn {
-                background-color: var(--secondary-color);
-                color: var(--bg-color);
-                border: none;
-                padding: 15px 30px;
-                font-size: 20px;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                border-radius: 5px;
-                width: 100%;
-                text-transform: uppercase;
-                letter-spacing: 2px;
-                font-weight: bold;
+                background-color: var(--secondary-color) !important;
+                color: var(--bg-color) !important;
+                border: none !important;
+                padding: 10px 30px !important;
+                font-size: 17px !important;
+                cursor: pointer !important;
+                transition: all 0.3s ease !important;
+                border-radius: 5px !important;
+                width: 100% !important;
+                text-transform: uppercase !important;
+                letter-spacing: 2px !important;
+                font-weight: bold !important;
             }
 
             .submit-btn:hover {
-                background-color: var(--tertiary-color);
-                color: var(--bg-color);
-                box-shadow: 0 0 15px var(--tertiary-color);
+                background-color: var(--tertiary-color) !important;
+                color: var(--bg-color) !important;
+                box-shadow: 0 0 15px var(--tertiary-color) !important;
             }
 
             .subscribers-table {
@@ -335,32 +335,33 @@
             </div>
 
             <h2 class="glitch-effect" data-text="Únete a la élite del cuidado vehicular">Únete a la élite del cuidado vehicular</h2>
-            <h:form id="subscriptionForm" class="subscription-form" action="#">
+            <h:form id="subscriptionForm" class="subscription-form">
                 <div class="form-group">
                     <label for="dni">DNI:</label>
                     <p:inputText type="text" id="dni" name="dni" required="true"
                                  requiredMessage="Ingrese una DNI válida"
-                                 validatorMessage="Ingrese un DNI válido (8 números seguidos)" value="#{suscriptor.dni}" />
+                                 validatorMessage="Ingrese un DNI válido (8 números seguidos)" value="#{suscripcionFace.suscripcionIngresada.dni}" />
                 </div>
                 <div class="form-group">
                     <label for="placa">Placa:</label>
                     <p:inputText type="text" id="placa" name="placa" required="true"
                                  requiredMessage="Ingrese una placa válida"
-                                 validatorMessage="Ingrese una placa válida (6 caracteres alfanuméricos)" value="#{suscriptor.placa}" />
+                                 validatorMessage="Ingrese una placa válida (6 caracteres alfanuméricos)" value="#{suscripcionFace.suscripcionIngresada.placa}" />
                 </div>
                 <div class="form-group">
                     <label for="tarjeta">Tarjeta de Pago:</label>
                     <p:inputText type="text" id="tarjeta" name="tarjeta" required="true"
                                  requiredMessage="Ingrese un número de tarjeta válida"
-                                 validatorMessage="Ingrese un número de tarjeta válido (16 dígitos)" value="#{suscriptor.tarjeta}" />
+                                 validatorMessage="Ingrese un número de tarjeta válido (16 dígitos)" value="#{suscripcionFace.suscripcionIngresada.tarjeta}" />
                 </div>
                 <div class="form-group">
                     <label for="plan">Plan de Suscripción:</label>
-                    <p:selectOneMenu id="plan" name="plan" required="true" requiredMessage="Seleccione su suscripcion">
-                        <f:selectItems value="#{planSuscripcion.values().toList().get(i).name()}" var="plan" />
+                    <p:selectOneMenu id="plan" value="#{suscripcionFace.suscripcionIngresada.plan}" required="true" requiredMessage="Seleccione su suscripción">
+                        <f:selectItems value="#{suscripcionFace.planesSuscripcion}" var="plan" itemLabel="#{plan}" itemValue="#{plan}" />
                     </p:selectOneMenu>
                 </div>
-                <button type="submit" class="submit-btn">Suscribirse</button>
+                <p:commandButton value="Suscribirse" action="#{suscripcionFace.registrarSuscripcion}"
+                                 update="@form" styleClass="submit-btn" />
             </h:form>
 
             <div class="marketing">

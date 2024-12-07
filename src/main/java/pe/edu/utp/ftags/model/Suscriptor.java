@@ -13,6 +13,8 @@ public class Suscriptor implements Serializable {
     public String codigo_sorteo;
     public String plan;
 
+    public Suscriptor() {
+    }
 
     public Suscriptor(String plan, String tarjeta, String placa, String dni) {
         this.plan = plan;

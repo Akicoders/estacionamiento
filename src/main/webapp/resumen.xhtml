@@ -80,9 +80,9 @@
         }
 
         .detail {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
         }
 
         .label {
@@ -190,8 +190,10 @@
                             </span>
                             </div>
                             <h:panelGrid columns="2" rendered="#{registroFace.registroIngresado.lavado}">
-                                <span class="label">Lavado:</span>
-                                <span class="value">#{registroFace.registroIngresado.lavado ? 'Sí' : 'No'}</span>
+                                <div class="detail">
+                                    <span class="label">Lavado:</span>
+                                    <span class="value">#{registroFace.registroIngresado.lavado ? 'Sí' : 'No'}</span>
+                                </div>
                             </h:panelGrid>
                         </div>
                         <h:commandButton value="Regresar al formulario" action="#{registroFace.invalidarSesion}" styleClass="confirm-btn" />
