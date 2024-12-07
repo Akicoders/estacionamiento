@@ -19,26 +19,6 @@ public class culminarEstacionamientoFace {
 
     private int idRegistro;
     private RegistroEntrada registroSeleccionado;
-    private String fechaHoraEntradaString;
-
-    /*+
-    public culminarEstacionamientoFace() throws IOException {
-        String idParam = FacesContext.getCurrentInstance().getExternalContext()
-                .getRequestParameterMap().get("txtId");
-
-        if (idParam != null) {
-            idRegistro = Integer.parseInt(idParam);
-        }
-
-        if (idRegistro != 0) {
-            ReservaDAO reservaDAO = new ReservaDAO();
-            this.registroSeleccionado = reservaDAO.getConductorporId(idRegistro);
-
-            if (registroSeleccionado.getFechaHoraEntrada() != null) {
-                this.fechaHoraEntradaString = registroSeleccionado.getFechaHoraEntrada().toString();
-            }
-        }
-    }*/
 
     public void finalizarEstacionamiento(RegistroEntrada registroEntrada) throws IOException, IllegalArgumentException {
         ReservaDAO reservaDAO = new ReservaDAO();
@@ -90,14 +70,6 @@ public class culminarEstacionamientoFace {
 
     public void setRegistroSeleccionado(RegistroEntrada registroSeleccionado) {
         this.registroSeleccionado = registroSeleccionado;
-    }
-
-    public String getFechaHoraEntradaString() {
-        return fechaHoraEntradaString;
-    }
-
-    public void setFechaHoraEntradaString(String fechaHoraEntradaString) {
-        this.fechaHoraEntradaString = fechaHoraEntradaString;
     }
 
 }

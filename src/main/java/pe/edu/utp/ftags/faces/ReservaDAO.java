@@ -2,6 +2,7 @@ package pe.edu.utp.ftags.faces;
 import pe.edu.utp.ftags.model.RegistroEntrada;
 import pe.edu.utp.ftags.model.RegistroSalida;
 import pe.edu.utp.ftags.model.Salida;
+import pe.edu.utp.ftags.model.Reserva;
 import pe.edu.utp.ftags.model.TipoVehiculo;
 import pe.edu.utp.ftags.services.AppConfig;
 import pe.edu.utp.ftags.util.DataAccessMariaDB;

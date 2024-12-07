@@ -1,15 +1,8 @@
-package pe.edu.utp.ftags.faces;
+package pe.edu.utp.ftags.model;
 
-import pe.edu.utp.ftags.model.TipoVehiculo;
-
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-@ManagedBean
-@ViewScoped
 public class Reserva implements Serializable {
    private String nombreConductor;
    private int dni;
@@ -17,6 +10,8 @@ public class Reserva implements Serializable {
    private String placa;
    private static LocalDateTime fechaHoraEntrada;
    private static boolean lavado;
+
+   public Reserva () {}
 
    public static class Builder {
        private String nombreConductor;
@@ -102,6 +97,4 @@ public class Reserva implements Serializable {
     public void setLavado(boolean lavado) {
         this.lavado = lavado;
     }
-
-
 }
