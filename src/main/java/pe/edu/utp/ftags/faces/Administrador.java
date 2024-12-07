@@ -3,12 +3,13 @@ package pe.edu.utp.ftags.faces;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class Administrador implements Serializable {
     private String nombre;
     private LocalDateTime fechaContrato;

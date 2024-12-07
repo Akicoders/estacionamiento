@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @ManagedBean
-@SessionScoped
 public class ReservaDAO implements Serializable {
     private static final Logger log = Logger.getLogger("pe.edu.utp.estacionamiento");
 

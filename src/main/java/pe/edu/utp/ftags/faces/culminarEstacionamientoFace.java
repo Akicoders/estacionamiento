@@ -5,7 +5,9 @@ import pe.edu.utp.ftags.model.Salida;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
@@ -19,6 +21,7 @@ public class culminarEstacionamientoFace {
     private RegistroEntrada registroSeleccionado;
     private String fechaHoraEntradaString;
 
+    /*+
     public culminarEstacionamientoFace() throws IOException {
         String idParam = FacesContext.getCurrentInstance().getExternalContext()
                 .getRequestParameterMap().get("txtId");
@@ -35,13 +38,15 @@ public class culminarEstacionamientoFace {
                 this.fechaHoraEntradaString = registroSeleccionado.getFechaHoraEntrada().toString();
             }
         }
-    }
+    }*/
 
-    public void finalizarEstacionamiento() throws IOException, IllegalArgumentException {
+    public void finalizarEstacionamiento(RegistroEntrada registroEntrada) throws IOException, IllegalArgumentException {
         ReservaDAO reservaDAO = new ReservaDAO();
-        String lavadito = registroSeleccionado.getLavado();
+        String lavadito = registroEntrada.getLavado();
+        CarouselRegistroEntradaFace carouselRegistroEntradaFace = new CarouselRegistroEntradaFace();
+        carouselRegistroEntradaFace.getRegistroEntradaList().remove(registroEntrada);
 
-        LocalDateTime fechaHoraEntrada = LocalDateTime.parse(fechaHoraEntradaString);
+        LocalDateTime fechaHoraEntrada = LocalDateTime.parse(registroEntrada.getFechaHoraEntrada().toString());
 
         boolean lavado = false;
         if (lavadito != null) {
@@ -49,20 +54,26 @@ public class culminarEstacionamientoFace {
         }
 
         Salida salidaDriver = new Salida();
-        salidaDriver.setIdRegistroEntrada(registroSeleccionado.getIdRegistroEntrada());
-        salidaDriver.setNombreConductor(registroSeleccionado.getNombreConductor());
-        salidaDriver.setTipoVehiculo(registroSeleccionado.getTipoVehiculo());
-        salidaDriver.setPlaca(registroSeleccionado.getPlaca());
+        salidaDriver.setIdRegistroEntrada(registroEntrada.getIdRegistroEntrada());
+        salidaDriver.setNombreConductor(registroEntrada.getNombreConductor());
+        salidaDriver.setTipoVehiculo(registroEntrada.getTipoVehiculo());
+        salidaDriver.setPlaca(registroEntrada.getPlaca());
         salidaDriver.setLavado(lavado);
         salidaDriver.setFechaHoraEntrada(fechaHoraEntrada);
         salidaDriver.setFechaHoraSalida(LocalDateTime.now());
         salidaDriver.setTotal(reservaDAO.getTotal(fechaHoraEntrada, lavado));
-        salidaDriver.setIdConductor(registroSeleccionado.getIdConductor());
-        salidaDriver.setIdVehiculo(registroSeleccionado.getIdVehiculo());
+        salidaDriver.setIdConductor(registroEntrada.getIdConductor());
+        salidaDriver.setIdVehiculo(registroEntrada.getIdVehiculo());
 
         reservaDAO.newRegistroSalida(salidaDriver);
 
-        FacesContext.getCurrentInstance().getExternalContext().redirect("src/main/webapp/drivers.xhtml");
+        reload();
+
+    }
+
+    public void reload() throws IOException {
+        ExternalContext driver = FacesContext.getCurrentInstance().getExternalContext();
+        driver.redirect(((HttpServletRequest) driver.getRequest()).getRequestURI());
     }
 
     public int getIdRegistro() {

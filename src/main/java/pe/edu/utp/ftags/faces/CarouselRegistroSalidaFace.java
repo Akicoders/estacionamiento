@@ -2,12 +2,12 @@ package pe.edu.utp.ftags.faces;
 import pe.edu.utp.ftags.model.RegistroSalida;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import java.io.IOException;
 import java.util.List;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class CarouselRegistroSalidaFace {
 
     private List<RegistroSalida> registroSalidaList;

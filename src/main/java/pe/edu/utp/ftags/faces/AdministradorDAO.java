@@ -18,7 +18,6 @@ import java.sql.Types;
 import java.util.logging.Logger;
 
 @ManagedBean
-@SessionScoped
 public class AdministradorDAO implements Serializable {
     private static final Logger log = Logger.getLogger("pe.edu.utp.estacionamiento");
 
