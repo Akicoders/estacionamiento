@@ -71,7 +71,7 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.2</version>
                 <configuration>
-                    <warName>Estacionamiento-Cyberpunk</warName>
+                    <warName>Alquiler-Cyberpunk</warName>
                 </configuration>
             </plugin>
         </plugins>

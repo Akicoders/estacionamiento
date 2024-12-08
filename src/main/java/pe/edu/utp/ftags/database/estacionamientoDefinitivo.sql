@@ -16,8 +16,8 @@
 
 
 -- Volcando estructura de base de datos para Estacionamiento
-CREATE DATABASE IF NOT EXISTS `Estacionamiento` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
-USE `Estacionamiento`;
+CREATE DATABASE IF NOT EXISTS `alquiler` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+USE `alquiler`;
 
 -- Volcando estructura para tabla Estacionamiento.administrador
 CREATE TABLE IF NOT EXISTS `administrador` (
