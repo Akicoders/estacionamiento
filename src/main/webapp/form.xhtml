@@ -485,7 +485,8 @@
                             <label for="fechaHora">Fecha y Hora de Reserva:</label>
                             <p:inputText type="datetime-local" id="fechaHora" required="true"
                                          requiredMessage="Ingrese una fecha y hora válida" converter="localDateTimeConverter"
-                                         validatorMessage="La fecha y hora debe ser la fecha actual" value="#{registroFace.registroIngresado.fechaHoraEntrada}" />
+                                         validatorMessage="La fecha y hora debe ser la fecha actual"
+                                         value="#{registroFace.registroIngresado.fechaHoraEntrada}" />
                         </div>
                         <div class="form-group">
                             <label for="tipoVehiculo" class="toggle-label">Tipo de Vehículo:</label>
@@ -499,25 +500,31 @@
                             <label for="placa">Número de Placa:</label>
                             <p:inputText type="text" id="placa" required="true"
                                          requiredMessage="Ingrese una placa válida"
-                                         validatorMessage="Ingrese una placa válida (6 caracteres alfanuméricos)" value="#{registroFace.registroIngresado.placa}" />
+                                         validatorMessage="Ingrese una placa válida (6 caracteres alfanuméricos)"
+                                         value="#{registroFace.registroIngresado.placa}"
+                                         maxlength="6"/>
                         </div>
                         <div class="form-group">
                             <label for="dni">DNI del Piloto:</label>
                             <p:inputText type="text" id="dni" required="true"
                                          requiredMessage="Ingrese una DNI válida"
-                                         validatorMessage="Ingrese un DNI válido (8 números seguidos)" value="#{registroFace.registroIngresado.dni}" />
+                                         validatorMessage="Ingrese un DNI válido (8 números seguidos)"
+                                         value="#{registroFace.registroIngresado.dni}"
+                                         maxlength="8"/>
                         </div>
                         <div class="form-group">
                             <label for="nombreChofer">Nombre del Piloto:</label>
                             <p:inputText type="text" id="nombreChofer" required="true"
                                          requiredMessage="Ingrese una nombre del chofer"
-                                         validatorMessage="El nombre debe tener una longitud entre 2 y 20" value="#{registroFace.registroIngresado.nombreConductor}" />
+                                         validatorMessage="El nombre debe tener una longitud entre 2 y 20"
+                                         value="#{registroFace.registroIngresado.nombreConductor}"
+                                         maxlength="20"/>
                         </div>
 
                         <div class="toggle-container">
                             <label class="toggle-label">¿Desea lavado?</label>
                             <label class="toggle-switch">
-                                <h:selectBooleanCheckbox  id="lavado" required="true"
+                                <h:selectBooleanCheckbox  id="lavado"
                                              requiredMessage="Seleccione si desea el lavado"
                                              validatorMessage="El lavado debe ser si o no" value="#{registroFace.registroIngresado.lavado}" />
                                 <span class="slider"></span>
@@ -529,12 +536,12 @@
 
                         <p:commandButton value="Reservar Ahora" action="#{registroFace.registrarEstacionamiento}"
                                          update=":reservationForm :messages" />
+
                     </h:form>
-                    <p:messages id="messages" showDetail="true" />
+                    <p:messages id="messages" showDetail="true" autoUpdate="true" />
                 </div>
             </div>
         </div>
-
         <h:outputScript>
             document.getElementById('tipoVehiculo').addEventListener('change', function(e) {
                 // Obtén el valor seleccionado correctamente
@@ -544,7 +551,6 @@
                 // Cambia el atributo 'src' de la imagen con el valor obtenido
                 carImage.setAttribute('src', "img/" + tipoVehiculo + ".jpg");
             });
-
         </h:outputScript>
     </h:body>
 </f:view>

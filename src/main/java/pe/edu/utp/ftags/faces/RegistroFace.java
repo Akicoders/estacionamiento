@@ -5,6 +5,7 @@ import pe.edu.utp.ftags.model.Reserva;
 import pe.edu.utp.ftags.model.TipoVehiculo;
 import pe.edu.utp.ftags.services.Validator;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
@@ -13,6 +14,7 @@ import javax.servlet.ServletException;
 import java.io.Externalizable;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 @ManagedBean
@@ -33,7 +35,7 @@ public class RegistroFace {
         try {
 
             String lavado = registroIngresado.isLavado() ? "lavado" : "nolavado";
-            //Validator.validarConductor(registroIngresado.getNombreConductor(), dni, registroIngresado.getPlaca(), registroIngresado.getTipoVehiculo(), entrada);
+            Validator.validarConductor(registroIngresado.getNombreConductor(), String.valueOf(registroIngresado.getDni()), registroIngresado.getPlaca(), registroIngresado.getTipoVehiculo(), registroIngresado.getFechaHoraEntrada());
 
             boolean reserva_regular = lavado.equalsIgnoreCase("nolavado");
             boolean reserva_completo = lavado.equalsIgnoreCase("lavado");
@@ -50,8 +52,24 @@ public class RegistroFace {
 
             FacesContext.getCurrentInstance().getExternalContext().redirect("resumen.xhtml?faces-redirect=true");
 
+        } catch (IllegalArgumentException iae) {
+
+            FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error de validación", iae.getMessage())
+            );
+        } catch (RuntimeException re) {
+
+            FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error inesperado", "Ocurrió un error al guardar la reserva. Intente nuevamente.")
+            );
         } catch (Exception e) {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("error.xhtml?error=error_interno");
+
+            FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Se produjo un error inesperado.")
+            );
         }
 
     }

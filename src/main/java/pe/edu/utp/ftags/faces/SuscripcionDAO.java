@@ -7,6 +7,7 @@ import pe.edu.utp.ftags.model.Suscriptor;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.naming.NamingException;
 import java.io.IOException;
 import java.io.Serializable;
@@ -82,6 +83,7 @@ public class SuscripcionDAO implements Serializable {
         } catch (Exception e){
             String msg = String.format("Ocurrio una excepcion en registrar_suscripcion(%s): %s", suscriptor.getDni(),
                     e.getMessage());
+            FacesContext.getCurrentInstance().getExternalContext().redirect("error.xhtml?faces-redirect=true");
             log.warning(msg);
             throw new IllegalStateException(msg);
         }

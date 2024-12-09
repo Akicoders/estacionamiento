@@ -10,6 +10,7 @@ import pe.edu.utp.ftags.util.DataAccessMariaDB;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Connection;
@@ -51,6 +52,7 @@ public class ReservaDAO implements Serializable {
             cnn.close();
         } catch (Exception e) {
             String msg = String.format("Ocurrio una excepcion en MostrarRegistrosEntrada(): %s", e.getMessage());
+            FacesContext.getCurrentInstance().getExternalContext().redirect("error.xhtml?faces-redirect=true");
             log.warning(msg);
             throw new IllegalStateException(msg);
         }
@@ -84,6 +86,7 @@ public class ReservaDAO implements Serializable {
             cnn.close();
         } catch (Exception e) {
             String msg = String.format("Ocurrio una excepcion en MostrarRegistrosSalida(): %s", e.getMessage());
+            FacesContext.getCurrentInstance().getExternalContext().redirect("error.xhtml?faces-redirect=true");
             log.warning(msg);
             throw new IllegalStateException(msg);
         }
@@ -144,6 +147,7 @@ public class ReservaDAO implements Serializable {
             cnn.close();
         } catch (Exception e) {
             String msg = String.format("Ocurrio una excepcion en pr_RegistrarEntrada(%s): %s", reserva.getNombreConductor(),  e.getMessage());
+            FacesContext.getCurrentInstance().getExternalContext().redirect("error.xhtml?faces-redirect=true");
             log.warning(msg);
             throw new IllegalStateException(msg);
         }
@@ -162,6 +166,7 @@ public class ReservaDAO implements Serializable {
         } catch (Exception e) {
             String msg = String.format("Ocurrio una excepcion en pr_RegistrarSalida(%d): %s", salida.getNombreConductor(),
                     e.getMessage());
+            FacesContext.getCurrentInstance().getExternalContext().redirect("error.xhtml?faces-redirect=true");
             log.warning(msg);
             throw new IllegalStateException(msg);
         }

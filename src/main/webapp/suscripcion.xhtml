@@ -340,19 +340,25 @@
                     <label for="dni">DNI:</label>
                     <p:inputText type="text" id="dni" name="dni" required="true"
                                  requiredMessage="Ingrese una DNI válida"
-                                 validatorMessage="Ingrese un DNI válido (8 números seguidos)" value="#{suscripcionFace.suscripcionIngresada.dni}" />
+                                 validatorMessage="Ingrese un DNI válido (8 números seguidos)"
+                                 value="#{suscripcionFace.suscripcionIngresada.dni}"
+                                 maxlength="8"/>
                 </div>
                 <div class="form-group">
                     <label for="placa">Placa:</label>
                     <p:inputText type="text" id="placa" name="placa" required="true"
                                  requiredMessage="Ingrese una placa válida"
-                                 validatorMessage="Ingrese una placa válida (6 caracteres alfanuméricos)" value="#{suscripcionFace.suscripcionIngresada.placa}" />
+                                 validatorMessage="Ingrese una placa válida (6 caracteres alfanuméricos)"
+                                 value="#{suscripcionFace.suscripcionIngresada.placa}"
+                                 maxlength="6"/>
                 </div>
                 <div class="form-group">
                     <label for="tarjeta">Tarjeta de Pago:</label>
                     <p:inputText type="text" id="tarjeta" name="tarjeta" required="true"
                                  requiredMessage="Ingrese un número de tarjeta válida"
-                                 validatorMessage="Ingrese un número de tarjeta válido (16 dígitos)" value="#{suscripcionFace.suscripcionIngresada.tarjeta}" />
+                                 validatorMessage="Ingrese un número de tarjeta válido (16 dígitos)"
+                                 value="#{suscripcionFace.suscripcionIngresada.tarjeta}"
+                                 maxlength="16"/>
                 </div>
                 <div class="form-group">
                     <label for="plan">Plan de Suscripción:</label>
@@ -361,8 +367,9 @@
                     </p:selectOneMenu>
                 </div>
                 <p:commandButton value="Suscribirse" action="#{suscripcionFace.registrarSuscripcion}"
-                                 update="@form" styleClass="submit-btn" />
+                                 update=":subscriptionForm :messages" styleClass="submit-btn" />
             </h:form>
+            <p:messages id="messages" showDetail="true" autoUpdate="true" />
 
             <div class="marketing">
                 <h2 class="glitch-effect" data-text="¡Únete a la élite del lavado cyberpunk!">¡Únete a la élite del lavado cyberpunk!</h2>
