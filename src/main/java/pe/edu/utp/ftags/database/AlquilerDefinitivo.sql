@@ -15,11 +15,11 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
--- Volcando estructura de base de datos para Estacionamiento
+-- Volcando estructura de base de datos para alquiler
 CREATE DATABASE IF NOT EXISTS `alquiler` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 USE `alquiler`;
 
--- Volcando estructura para tabla Estacionamiento.administrador
+-- Volcando estructura para tabla alquiler.administrador
 CREATE TABLE IF NOT EXISTS `administrador` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador unico del administador',
   `nombre` varchar(50) NOT NULL DEFAULT 'Ingresar Nombre',
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `administrador` (
   CONSTRAINT `FK_administrador_estacionamiento` FOREIGN KEY (`idEstacionamiento`) REFERENCES `estacionamiento` (`idEstacionamiento`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Tabla de administrador donde estaran repartidos por cada Estacionamiento :D';
 
--- Volcando datos para la tabla Estacionamiento.administrador: ~10 rows (aproximadamente)
+-- Volcando datos para la tabla alquiler.administrador: ~10 rows (aproximadamente)
 INSERT INTO `administrador` (`id`, `nombre`, `fechaContrato`, `dni`, `idEstacionamiento`, `clave`, `cuenta`) VALUES
 	(1, 'Paul Campos Terrones', '2024-11-17 03:49:52', '76898989', 1, '65de984edd4d4c2c1854df6baf257fa1', 'paulcito'),
 	(5, 'Juanpi Sanandres Vela', '2024-11-17 03:54:49', '98786753', 2, '11d90554f73e5aac222e6b6eb99654e3', 'juanpidev'),
@@ -46,23 +46,21 @@ INSERT INTO `administrador` (`id`, `nombre`, `fechaContrato`, `dni`, `idEstacion
 	(13, 'AkiCoder', '2024-11-17 04:02:17', '45678743', 9, '1268975a6d34acd5b92840654528d66f', 'akicoder'),
 	(14, 'Gustavo Abad', '2024-11-17 04:03:54', '67876523', 10, '3dcaf41f68e54c7d0228154105558f61', 'quispe');
 
--- Volcando estructura para tabla Estacionamiento.conductor
+-- Volcando estructura para tabla alquiler.conductor
 CREATE TABLE IF NOT EXISTS `conductor` (
   `idConductor` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador único del conductor',
   `nombre` varchar(50) NOT NULL COMMENT 'Nombre del conductor, entre 2 y 20 caracteres',
   `dni` char(8) NOT NULL COMMENT 'Documento Nacional de Identidad del conductor, 8 dígitos',
   PRIMARY KEY (`idConductor`),
   UNIQUE KEY `dni` (`dni`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Tabla que almacena los datos de los conductores';
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Tabla que almacena los datos de los conductores';
 
--- Volcando datos para la tabla Estacionamiento.conductor: ~13 rows (aproximadamente)
+-- Volcando datos para la tabla alquiler.conductor: ~18 rows (aproximadamente)
 INSERT INTO `conductor` (`idConductor`, `nombre`, `dni`) VALUES
 	(4, 'Ana Torres', '45678901'),
-	(6, 'Pedro Sanchez', '67890123'),
 	(7, 'Laura Gomez', '78901234'),
 	(10, 'Miguel Diaz', '01234567'),
 	(18, 'Juanpi', '89453624'),
-	(20, 'Fernando', '41424678'),
 	(21, 'Ayrton', '30561233'),
 	(22, 'Cristian', '98098076'),
 	(24, 'Luis', '98794645'),
@@ -71,9 +69,14 @@ INSERT INTO `conductor` (`idConductor`, `nombre`, `dni`) VALUES
 	(27, 'Marco', '78904566'),
 	(28, 'Derick', '97823067'),
 	(29, 'Manuel', '90578284'),
-	(31, 'Enrique', '70645287');
+	(31, 'Enrique', '70645287'),
+	(32, 'Juanpi', '76896543'),
+	(33, 'Juanpi Sanandres', '98457362'),
+	(34, 'Paul chevo', '90747387'),
+	(35, 'Paul Campos', '74873883'),
+	(36, 'Detonamo Angie', '78463782');
 
--- Volcando estructura para tabla Estacionamiento.estacionamiento
+-- Volcando estructura para tabla alquiler.estacionamiento
 CREATE TABLE IF NOT EXISTS `estacionamiento` (
   `idEstacionamiento` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador único del estacionamiento',
   `nombre` varchar(50) NOT NULL COMMENT 'Nombre del estacionamiento',
@@ -81,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `estacionamiento` (
   PRIMARY KEY (`idEstacionamiento`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Tabla que almacena los estacionamientos disponibles';
 
--- Volcando datos para la tabla Estacionamiento.estacionamiento: ~10 rows (aproximadamente)
+-- Volcando datos para la tabla alquiler.estacionamiento: ~10 rows (aproximadamente)
 INSERT INTO `estacionamiento` (`idEstacionamiento`, `nombre`, `idAdministrador`) VALUES
 	(1, 'Estacionamiento Cyberpunk Central', 1),
 	(2, 'Estacionamiento Cyberpunk  Norte', 2),
@@ -94,7 +97,7 @@ INSERT INTO `estacionamiento` (`idEstacionamiento`, `nombre`, `idAdministrador`)
 	(9, 'Estacionamiento Cyberpunk  Parque', 9),
 	(10, 'Estacionamiento Cyberpunk  Estadio', 10);
 
--- Volcando estructura para procedimiento Estacionamiento.mostrar_suscripciones
+-- Volcando estructura para procedimiento alquiler.mostrar_suscripciones
 DELIMITER //
 CREATE PROCEDURE `mostrar_suscripciones`()
 BEGIN
@@ -103,7 +106,7 @@ BEGIN
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento Estacionamiento.pr_AgregarAdministrador
+-- Volcando estructura para procedimiento alquiler.pr_AgregarAdministrador
 DELIMITER //
 CREATE PROCEDURE `pr_AgregarAdministrador`(
 	IN `p_nombre` VARCHAR(50),
@@ -119,7 +122,7 @@ BEGIN
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento Estacionamiento.pr_EditarClaveAdministrador
+-- Volcando estructura para procedimiento alquiler.pr_EditarClaveAdministrador
 DELIMITER //
 CREATE PROCEDURE `pr_EditarClaveAdministrador`(
 	IN `p_cuenta` VARCHAR(50),
@@ -165,7 +168,7 @@ BEGIN
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento Estacionamiento.pr_MostrarConductorporId
+-- Volcando estructura para procedimiento alquiler.pr_MostrarConductorporId
 DELIMITER //
 CREATE PROCEDURE `pr_MostrarConductorporId`(
 	IN `p_IdEntrada` INT
@@ -191,7 +194,7 @@ BEGIN
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento Estacionamiento.pr_MostrarRegistrosEntrada
+-- Volcando estructura para procedimiento alquiler.pr_MostrarRegistrosEntrada
 DELIMITER //
 CREATE PROCEDURE `pr_MostrarRegistrosEntrada`()
 BEGIN
@@ -214,7 +217,7 @@ BEGIN
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento Estacionamiento.pr_MostrarRegistrosSalida
+-- Volcando estructura para procedimiento alquiler.pr_MostrarRegistrosSalida
 DELIMITER //
 CREATE PROCEDURE `pr_MostrarRegistrosSalida`()
 BEGIN
@@ -234,7 +237,7 @@ BEGIN
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento Estacionamiento.pr_RegistrarEntrada
+-- Volcando estructura para procedimiento alquiler.pr_RegistrarEntrada
 DELIMITER //
 CREATE PROCEDURE `pr_RegistrarEntrada`(
 	IN `p_nombreConductor` VARCHAR(50),
@@ -279,7 +282,7 @@ BEGIN
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento Estacionamiento.pr_RegistrarSalida
+-- Volcando estructura para procedimiento alquiler.pr_RegistrarSalida
 DELIMITER //
 CREATE PROCEDURE `pr_RegistrarSalida`(
 	IN `p_idRegistroEntrada` INT,
@@ -307,7 +310,45 @@ BEGIN
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento Estacionamiento.pr_VerificarCredencialesAdministrador
+-- Volcando estructura para procedimiento alquiler.pr_RegistroSalidaApi
+DELIMITER //
+CREATE PROCEDURE `pr_RegistroSalidaApi`(
+	IN `p_idRegistroEntrada` INT,
+	IN `p_fechaHoraSalida` DATETIME,
+	IN `p_total` DOUBLE(11,2)
+)
+    COMMENT 'Registra la salida del conductor ingresando su id'
+BEGIN
+
+	 DECLARE v_idConductor INT;
+    DECLARE v_idVehiculo INT;
+    DECLARE v_nombreConductor VARCHAR(255);
+    DECLARE v_placaVehiculo VARCHAR(20);
+    DECLARE v_tipoVehiculo VARCHAR(50);
+    DECLARE v_fechaHoraEntrada DATETIME;
+    DECLARE v_lavadoSolicitado BOOLEAN;
+	
+	 IF EXISTS (SELECT 1 FROM registroentrada WHERE idRegistroEntrada = p_idRegistroEntrada) THEN
+		
+		SELECT idvehiculo, idconductor, fechahoraentrada, lavadosolicitado INTO v_idVehiculo, v_idConductor, v_fechaHoraEntrada, v_lavadoSolicitado FROM registroentrada WHERE idregistroentrada = p_idRegistroEntrada;
+		SELECT nombre INTO v_nombreConductor FROM conductor WHERE idconductor = v_idConductor;
+		SELECT placa, tipo INTO v_placaVehiculo, v_tipoVehiculo FROM vehiculo WHERE idvehiculo = v_idVehiculo;
+		
+		
+	    DELETE FROM registroentrada WHERE idRegistroEntrada = p_idRegistroEntrada;
+	    DELETE FROM conductor WHERE idConductor = v_idConductor;
+	    DELETE FROM vehiculo WHERE idVehiculo = v_idVehiculo;
+	    INSERT INTO registrosalida (idEstacionamiento, nombre, tipo, placa, lavadoSolicitado, fechaHoraEntrada, fechaHoraSalida, total)
+	        VALUES (1, v_nombreConductor, v_tipoVehiculo, v_placaVehiculo, v_lavadoSolicitado, v_fechaHoraEntrada, p_fechaHoraSalida, p_total);
+    ELSE
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Registro de entrada no existe';
+    END IF;
+	
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento alquiler.pr_VerificarCredencialesAdministrador
 DELIMITER //
 CREATE PROCEDURE `pr_VerificarCredencialesAdministrador`(
 	IN `p_cuenta` VARCHAR(50),
@@ -335,7 +376,7 @@ BEGIN
 END//
 DELIMITER ;
 
--- Volcando estructura para procedimiento Estacionamiento.registrar_suscripcion
+-- Volcando estructura para procedimiento alquiler.registrar_suscripcion
 DELIMITER //
 CREATE PROCEDURE `registrar_suscripcion`(
     IN p_dni INT(8),
@@ -375,7 +416,7 @@ BEGIN
 END//
 DELIMITER ;
 
--- Volcando estructura para tabla Estacionamiento.registroentrada
+-- Volcando estructura para tabla alquiler.registroentrada
 CREATE TABLE IF NOT EXISTS `registroentrada` (
   `idRegistroEntrada` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador único del registro de entrada',
   `idEstacionamiento` int(11) NOT NULL COMMENT 'Llave foránea del estacionamiento',
@@ -390,15 +431,12 @@ CREATE TABLE IF NOT EXISTS `registroentrada` (
   CONSTRAINT `RegistroEntrada_ibfk_1` FOREIGN KEY (`idEstacionamiento`) REFERENCES `estacionamiento` (`idEstacionamiento`),
   CONSTRAINT `RegistroEntrada_ibfk_2` FOREIGN KEY (`idConductor`) REFERENCES `conductor` (`idConductor`),
   CONSTRAINT `RegistroEntrada_ibfk_3` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculo` (`idVehiculo`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Tabla que almacena los registros de entrada de vehículos';
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Tabla que almacena los registros de entrada de vehículos';
 
--- Volcando datos para la tabla Estacionamiento.registroentrada: ~13 rows (aproximadamente)
+-- Volcando datos para la tabla alquiler.registroentrada: ~16 rows (aproximadamente)
 INSERT INTO `registroentrada` (`idRegistroEntrada`, `idEstacionamiento`, `idConductor`, `idVehiculo`, `fechaHoraEntrada`, `lavadoSolicitado`) VALUES
 	(4, 4, 4, 4, '2024-10-02 11:00:00', 0),
-	(6, 6, 6, 6, '2024-10-02 13:00:00', 0),
-	(7, 7, 7, 7, '2024-10-03 14:00:00', 1),
 	(19, 1, 18, 19, '2024-12-07 01:24:00', 0),
-	(22, 1, 20, 21, '2024-12-07 01:46:00', 1),
 	(23, 1, 21, 22, '2024-12-07 02:27:00', 1),
 	(24, 1, 22, 23, '2024-12-07 02:09:00', 0),
 	(26, 1, 24, 25, '2024-12-07 04:20:00', 1),
@@ -407,9 +445,14 @@ INSERT INTO `registroentrada` (`idRegistroEntrada`, `idEstacionamiento`, `idCond
 	(29, 1, 27, 28, '2024-12-07 02:36:00', 0),
 	(30, 1, 28, 29, '2024-12-08 12:42:00', 1),
 	(31, 1, 29, 30, '2024-12-08 12:44:00', 1),
-	(33, 1, 31, 32, '2024-12-09 12:48:00', 1);
+	(33, 1, 31, 32, '2024-12-09 12:48:00', 1),
+	(34, 1, 32, 33, '2024-12-10 00:11:00', 0),
+	(35, 1, 33, 34, '2024-12-09 00:31:00', 0),
+	(36, 1, 34, 35, '2024-12-09 00:34:00', 1),
+	(37, 1, 35, 36, '2024-12-09 00:57:00', 1),
+	(38, 1, 36, 37, '2024-12-09 02:20:00', 1);
 
--- Volcando estructura para tabla Estacionamiento.registrosalida
+-- Volcando estructura para tabla alquiler.registrosalida
 CREATE TABLE IF NOT EXISTS `registrosalida` (
   `idRegistroSalida` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador único del registro de salida',
   `idEstacionamiento` int(11) NOT NULL COMMENT 'Llave foránea del estacionamiento',
@@ -423,9 +466,9 @@ CREATE TABLE IF NOT EXISTS `registrosalida` (
   PRIMARY KEY (`idRegistroSalida`),
   KEY `idEstacionamiento` (`idEstacionamiento`),
   CONSTRAINT `RegistroSalida_ibfk_1` FOREIGN KEY (`idEstacionamiento`) REFERENCES `estacionamiento` (`idEstacionamiento`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Tabla que almacena los registros de salida de vehículos y el fin de la reserva';
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Tabla que almacena los registros de salida de vehículos y el fin de la reserva';
 
--- Volcando datos para la tabla Estacionamiento.registrosalida: ~9 rows (aproximadamente)
+-- Volcando datos para la tabla alquiler.registrosalida: ~13 rows (aproximadamente)
 INSERT INTO `registrosalida` (`idRegistroSalida`, `idEstacionamiento`, `nombre`, `tipo`, `placa`, `lavadoSolicitado`, `fechaHoraEntrada`, `fechaHoraSalida`, `total`) VALUES
 	(20, 1, 'Jose', 'AUTO', 'I8O00P', 0, '2024-10-14 14:31:00', '2024-10-17 02:10:40', 295.00),
 	(21, 1, 'Pablito', 'BUS', 'U4G657', 0, '2024-10-14 13:28:00', '2024-10-17 02:33:10', 305.00),
@@ -436,9 +479,12 @@ INSERT INTO `registrosalida` (`idRegistroSalida`, `idEstacionamiento`, `nombre`,
 	(26, 1, 'Pablo', 'MOTO', 'HU7OI0', 0, '2024-12-07 02:13:00', '2024-12-07 02:37:20', 0.00),
 	(27, 1, 'Renzo', 'CUATRIMOTO', 'KL90PÑ', 0, '2024-12-07 01:41:00', '2024-12-07 02:37:36', 0.00),
 	(28, 1, 'Jorge Ruiz', 'SUV', 'VWX234', 0, '2024-10-03 15:00:00', '2024-12-07 02:37:40', 7735.00),
-	(29, 1, 'Angelo', 'CAMIONETA', 'FG7TY1', 0, '2024-12-09 12:46:00', '2024-12-07 12:49:29', 0.00);
+	(29, 1, 'Angelo', 'CAMIONETA', 'FG7TY1', 0, '2024-12-09 12:46:00', '2024-12-07 12:49:29', 0.00),
+	(30, 1, 'Pedro Sanchez', 'Moto', 'PQR678', 0, '2024-10-02 13:00:00', '2024-12-09 03:05:00', 1.00),
+	(31, 1, 'Renzo Rojas', 'AUTO', 'JU9LS2', 1, '2024-12-09 02:22:00', '2024-12-09 03:05:00', 1.00),
+	(32, 1, 'Fernando', 'MOTO', 'OP5LO4', 1, '2024-12-07 01:46:00', '2024-12-09 04:03:55', 250.00);
 
--- Volcando estructura para tabla Estacionamiento.suscripciones
+-- Volcando estructura para tabla alquiler.suscripciones
 CREATE TABLE IF NOT EXISTS `suscripciones` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `dni` varchar(8) NOT NULL DEFAULT '' COMMENT 'DNI del suscriptor',
@@ -448,9 +494,9 @@ CREATE TABLE IF NOT EXISTS `suscripciones` (
   `codigo_sorteo` char(9) NOT NULL COMMENT 'Código de sorteo de 9 dígitos',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `codigo_sorteo` (`codigo_sorteo`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Tabla diseñada para guardar todas las suscripciones que se hagan.';
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Tabla diseñada para guardar todas las suscripciones que se hagan.';
 
--- Volcando datos para la tabla Estacionamiento.suscripciones: ~14 rows (aproximadamente)
+-- Volcando datos para la tabla alquiler.suscripciones: ~28 rows (aproximadamente)
 INSERT INTO `suscripciones` (`id`, `dni`, `placa`, `tarjeta`, `plan`, `codigo_sorteo`) VALUES
 	(1, '12345678', 'ABC123', '4111111111111111', 'gold', '423233878'),
 	(2, '87654321', 'XYZ987', '4222222222222222', 'diamond', '242856275'),
@@ -471,26 +517,32 @@ INSERT INTO `suscripciones` (`id`, `dni`, `placa`, `tarjeta`, `plan`, `codigo_so
 	(17, '67398023', 'HG7YT8', '9b8a421bff5f30d20f118185eb6e4523', 'diamond', '836984021'),
 	(18, '56483422', 'DSJ87L', 'bbc0ba70efd34473f1519050b3c0cab5', 'radio', '676345393'),
 	(19, '76598023', 'FT6KO1', '528cbb4b4516adaf12d61b0439a0390a', 'diamond', '870774934'),
-	(20, '78645632', 'JK7GY5', 'a2fd21061454b478daa8594e079ff2d5', 'gold', '324838524');
+	(20, '78645632', 'JK7GY5', 'a2fd21061454b478daa8594e079ff2d5', 'gold', '324838524'),
+	(21, '88447457', 'JI9OL2', '716f9480fc58d032f7c4431f3f25cc33', 'diamond', '737130925'),
+	(22, '12333', 'HU2', '99d6416213596471b4d81a824f0215e2', 'gold', '743413094'),
+	(23, '4562', 'KI9', '1f63b55cff126f38187188cdacb51f6f', 'radio', '505672724'),
+	(24, '4562', 'KI9', '1f63b55cff126f38187188cdacb51f6f', 'radio', '298124370'),
+	(25, '7823', 'JI9S', '996bb073fa1c3f18ee148988e208809c', 'gold', '973603709'),
+	(26, '23457272', 'JU8IKI', 'cf2099d3eaa453ba49e8d1e9f243e793', 'diamond', '973645467'),
+	(27, '71878524', 'XXXHTL', '9b8a421bff5f30d20f118185eb6e4523', 'null', '151557508'),
+	(28, '89453726', 'MKLR23', 'c83b0d1db408e9ad8faacdc0bb71afb7', 'gold', '305303803');
 
--- Volcando estructura para tabla Estacionamiento.vehiculo
+-- Volcando estructura para tabla alquiler.vehiculo
 CREATE TABLE IF NOT EXISTS `vehiculo` (
   `idVehiculo` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador único del vehículo',
   `placa` varchar(6) NOT NULL COMMENT 'Placa del vehículo (6 caracteres alfanuméricos)',
   `tipo` varchar(50) NOT NULL COMMENT 'Tipo de vehículo (Auto, Moto, etc.)',
   PRIMARY KEY (`idVehiculo`),
   UNIQUE KEY `placa` (`placa`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Tabla que almacena los vehículos';
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Tabla que almacena los vehículos';
 
--- Volcando datos para la tabla Estacionamiento.vehiculo: ~15 rows (aproximadamente)
+-- Volcando datos para la tabla alquiler.vehiculo: ~19 rows (aproximadamente)
 INSERT INTO `vehiculo` (`idVehiculo`, `placa`, `tipo`) VALUES
 	(4, 'JKL012', 'SUV'),
-	(6, 'PQR678', 'Moto'),
 	(7, 'STU901', 'Camioneta'),
 	(10, 'BCD890', 'Camion'),
 	(15, 'J7N34E', 'CAMIONETA'),
 	(19, 'K9I08P', 'BUS'),
-	(21, 'OP5LO4', 'MOTO'),
 	(22, 'JUY78E', 'MOTO'),
 	(23, 'JM8NN6', 'AUTO'),
 	(25, 'JH0TY6', 'MOTO'),
@@ -499,7 +551,12 @@ INSERT INTO `vehiculo` (`idVehiculo`, `placa`, `tipo`) VALUES
 	(28, 'IO0PU8', 'COMBI'),
 	(29, 'GH7TY3', 'MOTO'),
 	(30, 'IO9LK2', 'SUV'),
-	(32, 'JUI8TY', 'SUV');
+	(32, 'JUI8TY', 'SUV'),
+	(33, 'JIU29O', 'MOTO'),
+	(34, 'JH8UY2', 'SUV'),
+	(35, 'JI9HY2', 'CUATRIMOTO'),
+	(36, 'JIU3KO', 'SUV'),
+	(37, 'GT7LO2', 'COMBI');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
